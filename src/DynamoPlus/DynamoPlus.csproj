@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E2748CBA-9A20-47F7-BA7A-CDD163AFEDF6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DynamoPlus</RootNamespace>
+    <AssemblyName>DynamoPlus</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>C:\Program Files\Dynamo 0.8\nodes\</OutputPath>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\DynamoPlus.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>C:\Program Files\Dynamo 0.8\nodes\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>0</WarningLevel>
+    <DocumentationFile>C:\Programme\Dynamo 0.8\nodes\DynamoPlus.xml</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DSCoreNodes">
+      <HintPath>C:\Program Files\Dynamo 0.8\DSCoreNodes.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DSCoreNodesUI">
+      <HintPath>C:\Program Files\Dynamo 0.8\nodes\DSCoreNodesUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DynamoCore">
+      <HintPath>C:\Program Files\Dynamo 0.8\DynamoCore.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Prism">
+      <HintPath>C:\Program Files\Dynamo 0.8\nodes\Microsoft.Practices.Prism.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ProtoCore">
+      <HintPath>C:\Program Files\Dynamo 0.8\ProtoCore.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ProtoGeometry">
+      <HintPath>C:\Program Files\Dynamo 0.8\ProtoGeometry.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ProtoInterface">
+      <HintPath>C:\Program Files\Dynamo 0.8\ProtoInterface.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Activities" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Activities" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Elements\Construction.cs" />
+    <Compile Include="Elements\MaterialTypes\MaterialReader.cs" />
+    <Compile Include="Elements\MaterialTypes\WindowMaterialGas.cs" />
+    <Compile Include="Elements\MaterialTypes\WindowMaterialSimpleGlazingSystem.cs" />
+    <Compile Include="Elements\MaterialTypes\MaterialAirGap.cs" />
+    <Compile Include="Elements\MaterialTypes\MaterialNoMass.cs" />
+    <Compile Include="Elements\MaterialTypes\WindowMaterialGlazing.cs" />
+    <Compile Include="Helper\AbsElement.cs" />
+    <Compile Include="Helper\NoDuplicateList.cs" />
+    <Compile Include="Elements\ShadingOverhang.cs" />
+    <Compile Include="Elements.cs" />
+    <Compile Include="idfFile\StringCollector.cs" />
+    <Compile Include="Simulation.cs" />
+    <Compile Include="EquipmentList.cs" />
+    <Compile Include="Elements\FenestrationSurface.cs" />
+    <Compile Include="idfFile\Template.cs" />
+    <Compile Include="IdealLoadsAirSystem.cs" />
+    <Compile Include="Elements\Building.cs" />
+    <Compile Include="idfFile\IDFFile.cs" />
+    <Compile Include="Elements\MaterialTypes\Material.cs" />
+    <Compile Include="Project.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Elements\ShadingSurface.cs" />
+    <Compile Include="Elements\Surface.cs" />
+    <Compile Include="Elements\Zone.cs" />
+    <Compile Include="ZoneConnections.cs" />
+    <Compile Include="Elements\ZoneList.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
