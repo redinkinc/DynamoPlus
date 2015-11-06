@@ -41,16 +41,23 @@ namespace DynamoPlus
             return list;
         }
 
-       
 
+        /// <summary>
+        /// Returns a string that represents the current object.
+        /// </summary>
+        /// <returns>
+        /// A string that represents the current object.
+        /// </returns>
         public override string ToString()
         {
             return Name;
         }
 
-       
 
-
+        /// <summary>
+        /// Adds possibility to write into a file
+        /// </summary>
+        /// <returns></returns>
         public override string Write()
         {
             string temp = "Material:AirGap,\n";

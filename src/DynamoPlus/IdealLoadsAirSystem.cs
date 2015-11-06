@@ -3,10 +3,9 @@
  *  
  *  Copyright (c) 2014-2015 Technische Universitaet Muenchen, 
  *  Chair of Computational Modeling and Simulation (https://www.cms.bgu.tum.de/)
- *  LEONHARD OBERMEYER CENTER (www.loc.tum.de)
+ *  LEONHARD OBERMEYER CENTER (http://www.loc.tum.de)
  *  
- *  Developed by Fabian Ritter, Florian Englberger
- *  Contact: Fabian.Ritter@tum.de
+ *  Developed by Fabian Ritter (contact: mailto:mail@redinkinc.de) and Florian Englberger
  * 
  *  DynamoPlus is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -21,6 +20,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with DynamoPlus. If not, see <http://www.gnu.org/licenses/>.
  */
+
 
 using Autodesk.DesignScript.Runtime;
 
@@ -44,6 +44,12 @@ namespace DynamoPlus
             InletNode = zone.Name + " Supply Inlet";
         }
 
+        /// <summary>
+        /// Returns a string that represents the current object.
+        /// </summary>
+        /// <returns>
+        /// A string that represents the current object.
+        /// </returns>
         public override string ToString()
         {
             return Name;

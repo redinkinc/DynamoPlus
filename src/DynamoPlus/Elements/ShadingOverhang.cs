@@ -29,7 +29,7 @@ using Autodesk.DesignScript.Runtime;
 namespace DynamoPlus
 {
     /// <summary>
-    /// Used to define Shading Overhangs above a Fenestration Surface
+    /// Used to define Shading Overhangs above a FenestrationSurface
     /// </summary>
 
     public class ShadingOverhang : AbsElement
@@ -41,7 +41,7 @@ namespace DynamoPlus
         double TiltAngle { get; set; }
       
         /// <summary>
-        /// Adds a symmetrical Shading Overhang above a Fenestration Surface with an Angle of 90 degree.
+        /// Adds a symmetrical Shading Overhang above a FenestrationSurface with an Angle of 90 degree.
         /// </summary>
         /// <param name="fenestrationSurface"></param>
         /// <param name="heightAbove"></param>
@@ -58,6 +58,12 @@ namespace DynamoPlus
             fenestrationSurface.ShadingOverhang = this;
         }
 
+        /// <summary>
+        /// Returns a string that represents the current object.
+        /// </summary>
+        /// <returns>
+        /// A string that represents the current object.
+        /// </returns>
         public override string ToString()
         {
             return Name + ";";
@@ -88,7 +94,7 @@ namespace DynamoPlus
         /// </summary>
         /// <param name="shadingOverhangsList"></param>
         /// <returns></returns>
-        public static List<PolyCurve> DrawShadingOverhang(List<ShadingOverhang> shadingOverhangsList)
+        private static List<PolyCurve> Draw(List<ShadingOverhang> shadingOverhangsList)
         {
             var rectangles = new List<PolyCurve>();
 

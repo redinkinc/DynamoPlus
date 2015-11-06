@@ -82,6 +82,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Create.cs" />
     <Compile Include="Elements\Construction.cs" />
     <Compile Include="Elements\MaterialTypes\MaterialReader.cs" />
     <Compile Include="Elements\MaterialTypes\WindowMaterialGas.cs" />
@@ -89,6 +90,7 @@
     <Compile Include="Elements\MaterialTypes\MaterialAirGap.cs" />
     <Compile Include="Elements\MaterialTypes\MaterialNoMass.cs" />
     <Compile Include="Elements\MaterialTypes\WindowMaterialGlazing.cs" />
+    <Compile Include="Elements\BuildingSurface.cs" />
     <Compile Include="Helper\AbsElement.cs" />
     <Compile Include="Helper\NoDuplicateList.cs" />
     <Compile Include="Elements\ShadingOverhang.cs" />
@@ -105,7 +107,6 @@
     <Compile Include="Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Elements\ShadingSurface.cs" />
-    <Compile Include="Elements\Surface.cs" />
     <Compile Include="Elements\Zone.cs" />
     <Compile Include="ZoneConnections.cs" />
     <Compile Include="Elements\ZoneList.cs" />

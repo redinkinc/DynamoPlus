@@ -42,7 +42,7 @@ namespace DynamoPlus
         /// </summary>
         /// <param name="points"></param>
         /// <param name="name"></param>
-        /// <param name="Fixed">Defines if the Shading Surface is oriented on the global (false) or relative (true) coordinate system</param>
+        /// <param name="Fixed">Defines if the ShadingSurface is oriented on the global (false) or relative (true) coordinate system</param>
         public ShadingSurface(List<Point> points, string name, bool Fixed = false)
         {
             PointList = points;
@@ -50,6 +50,12 @@ namespace DynamoPlus
             IsFixed = Fixed;
         }
 
+        /// <summary>
+        /// Returns a string that represents the current object.
+        /// </summary>
+        /// <returns>
+        /// A string that represents the current object.
+        /// </returns>
         public override string ToString()
         {
             return Name;
@@ -72,7 +78,6 @@ namespace DynamoPlus
                 temp = "\nShading:Site:Detailed,\n";
 
             }
-            ;
 
             temp += Name + ",  !- Name\n";
             temp += ",                !- Shadowing Transmittance & Schedule \n";
@@ -98,14 +103,12 @@ namespace DynamoPlus
 
         //[FR] move to building
         /// <summary>
-
         /// Adds Shading Surfaces by a List of Dynamo Surfaces
         /// </summary>
         /// <param name="surfaces"></param>
         /// <returns></returns>
-
         public static List<ShadingSurface> ShadingSurfacesBySurfaceList(
-            List<Autodesk.DesignScript.Geometry.Surface> surfaces)
+            List<Surface> surfaces)
         {
             var i = 0;
             var shadingSurfaces = new List<ShadingSurface>();
@@ -119,7 +122,7 @@ namespace DynamoPlus
                         revitVertex.PointGeometry.Y/1000, revitVertex.PointGeometry.Z/1000);
                     points.Add(point);
                 }
-                var name = "ShadingSurface " + i.ToString();
+                var name = "ShadingSurface " + i;
                 i++;
                 var shadingSurface = new ShadingSurface(points, name);
                 //points.Clear();

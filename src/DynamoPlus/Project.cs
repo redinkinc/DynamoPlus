@@ -3,9 +3,9 @@
  *  
  *  Copyright (c) 2014-2015 Technische Universitaet Muenchen, 
  *  Chair of Computational Modeling and Simulation (https://www.cms.bgu.tum.de/)
- *  LEONHARD OBERMEYER CENTER (https://www.loc.tum.de)
+ *  LEONHARD OBERMEYER CENTER (http://www.loc.tum.de)
  *  
- *  Developed by Fabian Ritter, Florian Englberger
+ *  Developed by Fabian Ritter (contact: mailto:mail@redinkinc.de) and Florian Englberger
  * 
  *  DynamoPlus is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -20,6 +20,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with DynamoPlus. If not, see <http://www.gnu.org/licenses/>.
  */
+
 
 namespace DynamoPlus
 {
@@ -75,7 +76,7 @@ namespace DynamoPlus
         //        {"elements", elements}
         //    };
         //}
-        
+
         ///// <summary>
         ///// Exports all Project Elements into an EnergyPlus Simulation File.
         ///// </summary>

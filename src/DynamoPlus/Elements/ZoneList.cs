@@ -32,14 +32,17 @@ namespace DynamoPlus
     /// </summary>
     public class ZoneList:AbsElement
     {
-        private List<Zone> Zones { get; set; }
+        /// <summary>
+        /// The Zones Contained in the ZoneList
+        /// </summary>
+        public List<Zone> Zones { get; set; }
 
         //<
         /// <summary>
-        /// 
+        /// A EnergyPlus ZoneList Element.
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="zones"></param>
+        /// <param name="name">Name of the ZoneList</param>
+        /// <param name="zones">Zones to be added to ZoneList</param>
         public ZoneList(string name, List<Zone> zones)
         {
             Name = name;

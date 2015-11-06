@@ -47,23 +47,23 @@ namespace DynamoPlus
         /// <summary>
         /// Surface where the FenestrationSurface is lying in
         /// </summary>
-        public Surface Surface { get; set; }
+        public BuildingSurface BuildingSurface { get; set; }
         /// <summary>
         /// Corresponding Shading Overhang
         /// </summary>
         public ShadingOverhang ShadingOverhang { get; set; }
 
-        private FenestrationSurface(Surface surface, List<Point> points)
+        private FenestrationSurface(BuildingSurface buildingSurface, List<Point> points)
         {
-            Name = surface.Name + " - Window " + surface.FenestrationSurfacesNumber;
+            Name = buildingSurface.Name + " - Window " + buildingSurface.FenestrationSurfacesNumber;
 
             Type = "Window";
             ConstructionName = "000 Standard Window";
-            SurfaceName = surface.Name;
-            Surface = surface;
+            SurfaceName = buildingSurface.Name;
+            BuildingSurface = buildingSurface;
             PointList = points;
             //CheckAngle(surface);
-            surface.FenestrationSurfacesNumber++;
+            buildingSurface.FenestrationSurfacesNumber++;
             
         }
 
@@ -74,7 +74,7 @@ namespace DynamoPlus
         /// <param name="facelist"></param>
         /// <param name="surface"></param>
         /// <returns></returns>
-        public static List<FenestrationSurface> FenestrationSurfaceBySurfacelist (List<Face> facelist, Surface surface)
+        public static List<FenestrationSurface> FenestrationSurfaceBySurfacelist (List<Face> facelist, BuildingSurface surface)
         {
             return facelist.Select(face => face.Vertices.Select(
                 revitVertex => Point.ByCoordinates(revitVertex.PointGeometry.X/1000, revitVertex.PointGeometry.Y/1000, revitVertex.PointGeometry.Z/1000)).ToList()).
@@ -84,10 +84,10 @@ namespace DynamoPlus
         /// <summary>
         /// Adds EnergyPlus Windows (FenestrationSurface) to a list of rectangular EnergyPlus Surfaces by a given percentage.
         /// </summary>
-        /// <param name="surfaces">A list of Faces where the windows should be added to.</param>
+        /// <param name="buildingSurfaces">A list of BuildingSurfaces where the windows should be added to.</param>
         /// <param name="percentage">The glazing percentage (factor). Has to be between 0.05 and 0.95!</param>
         /// <returns></returns>
-        public static List<FenestrationSurface> ByGlazingPercentage(List<Surface> surfaces, double percentage = 0.5)
+        public static List<FenestrationSurface> ByGlazingPercentage(List<BuildingSurface> buildingSurfaces, double percentage = 0.5)
         {
             // check for the right percentage value and throw an exeption if fails
             if (percentage < 0.05 || percentage > 0.95)
@@ -98,11 +98,11 @@ namespace DynamoPlus
             var fenestrationsurfaceList = new List<FenestrationSurface>();
 
             // iterate over the surfaces
-            foreach (var surface in surfaces)
+            foreach (var surface in buildingSurfaces)
             {
                 
-                var vec1 = Vector.ByTwoPoints(surface.Points[0], surface.Points[1]);
-                var vec2 = Vector.ByTwoPoints(surface.Points[0], surface.Points[3]);
+                var vec1 = Vector.ByTwoPoints(surface.Surface.Vertices[0].PointGeometry, surface.Surface.Vertices[1].PointGeometry);
+                var vec2 = Vector.ByTwoPoints(surface.Surface.Vertices[0].PointGeometry, surface.Surface.Vertices[3].PointGeometry);
                 //calculate the distance from the border (offset) from the given surface
                 var length = vec1.Length;
                 var height = vec2.Length;
@@ -110,7 +110,7 @@ namespace DynamoPlus
 
                 //calculate new points for the FenestrationSurface
                 var points = new List<Point>();
-                var coordSystem = CoordinateSystem.ByOriginVectors(surface.Points[0], vec1, vec2);
+                var coordSystem = CoordinateSystem.ByOriginVectors(surface.Surface.Vertices[0].PointGeometry, vec1, vec2);
                 points.Add(Point.ByCartesianCoordinates(coordSystem, dist, dist));
                 points.Add(Point.ByCartesianCoordinates(coordSystem, length - dist, dist));
                 points.Add(Point.ByCartesianCoordinates(coordSystem, length - dist, height-dist));

@@ -3,9 +3,9 @@
  *  
  *  Copyright (c) 2014-2015 Technische Universitaet Muenchen, 
  *  Chair of Computational Modeling and Simulation (https://www.cms.bgu.tum.de/)
- *  LEONHARD OBERMEYER CENTER (www.loc.tum.de)
+ *  LEONHARD OBERMEYER CENTER (http://www.loc.tum.de)
  *  
- *  Developed by Fabian Ritter, Florian Englberger
+ *  Developed by Fabian Ritter (contact: mailto:mail@redinkinc.de) and Florian Englberger
  * 
  *  DynamoPlus is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -20,6 +20,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with DynamoPlus. If not, see <http://www.gnu.org/licenses/>.
  */
+
 
 using System.Collections.Generic;
 using System.Globalization;
@@ -38,9 +39,9 @@ namespace DynamoPlus
         private Point Origin { get; set; }
         private int Multiplier { get; set; }
         /// <summary>
-        /// The surfaces surrounding the zone
+        /// The surfaces within the zone
         /// </summary>
-        public List<Surface> Surfaces { get; set; }
+        public List<BuildingSurface> BuildingSurfaces { get; set; }
         /// <summary>
         /// Counter for surfaces
         /// </summary>
@@ -52,13 +53,14 @@ namespace DynamoPlus
         /// <param name="name"></param>
         /// <param name="orientation">The Orientation relative to the building</param>
         /// <param name="origin">The starting point of the zone</param>
-        public Zone(string name, double orientation, Point origin)        
+        /// <param name="multiplier"></param>
+        public Zone(string name, double orientation, Point origin, int multiplier = 1)        
         {
             Name = name;
             Orientation = orientation;
             Origin = origin;
-            Multiplier = 1;
-            Surfaces = new List<Surface>();
+            Multiplier = multiplier;
+            BuildingSurfaces = new List<BuildingSurface>();
             SurfaceNumber = 1;
         }
 
@@ -76,6 +78,12 @@ namespace DynamoPlus
             return zone;
         }
 
+        /// <summary>
+        /// Returns a string that represents the current object.
+        /// </summary>
+        /// <returns>
+        /// A string that represents the current object.
+        /// </returns>
         public override string ToString()
         {
             return Name;

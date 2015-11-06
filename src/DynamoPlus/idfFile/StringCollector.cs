@@ -23,7 +23,6 @@
 
 using System.IO;
 using System.Linq;
-using ProtoCore.Exceptions;
 
 namespace DynamoPlus.idfFile
 {
@@ -89,13 +88,15 @@ namespace DynamoPlus.idfFile
 
             zoneList = elements.ZoneLists.Aggregate(zoneList, (current, zList) => current + zList.Write());
 
-            if (elements.Surfaces.Count == 0)
+            //handles Surfaces and BuildingSurfaces right now. Should be changed to BuildingSurfaces on the long run...
+            if (elements.BuildingSurfaces.Count == 0)
             {
                 buildingSurfaces += "!No Surfaces defined\n";     
             }
             else
             {
-                buildingSurfaces = elements.Surfaces.Aggregate(buildingSurfaces, (current, surface) => current + surface.Write());
+                buildingSurfaces += elements.BuildingSurfaces.Aggregate(buildingSurfaces,
+                    (current, surface) => current + surface.Write());
             }
 
             if (elements.FenestrationSurfaces.Count == 0)

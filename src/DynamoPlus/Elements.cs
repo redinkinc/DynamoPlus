@@ -44,9 +44,9 @@ namespace DynamoPlus
         /// </summary>
         public NoDuplicateList<ZoneList> ZoneLists { get; set; } 
         /// <summary>
-        /// List of Surfaces
+        /// List of BuildingSurfaces
         /// </summary>
-        public NoDuplicateList<Surface> Surfaces { get; set; }
+        public NoDuplicateList<BuildingSurface> BuildingSurfaces { get; set; }
         /// <summary>
         /// List of Fenestration Surfaces
         /// </summary>
@@ -78,7 +78,7 @@ namespace DynamoPlus
         {
             Zones = new NoDuplicateList<Zone>();
             ZoneLists = new NoDuplicateList<ZoneList>();
-            Surfaces = new NoDuplicateList<Surface>();
+            BuildingSurfaces= new NoDuplicateList<BuildingSurface>();
             FenestrationSurfaces = new NoDuplicateList<FenestrationSurface>();
             ShadingSurfaces = new NoDuplicateList<ShadingSurface>();
             ShadingOverhangs = new NoDuplicateList<ShadingOverhang>();
@@ -125,20 +125,19 @@ namespace DynamoPlus
         }
 
         /// <summary>
-        /// 
+        /// Adds the BuildingSurfaces to the Project Elements.
         /// </summary>
-        /// <param name="surfaces"></param>
+        /// <param name="buildingSurfaces">List of BuildingSurfaces to be added.</param>
         /// <returns>The Elements object.</returns>
-        public Elements AddSurfaces(List<Surface> surfaces)
+        public Elements AddBuildingSurfaces(List<BuildingSurface> buildingSurfaces)
         {
-            foreach (var surface in surfaces)
+            foreach (var surface in buildingSurfaces)
             {
-                Surfaces.Add(surface);
+                BuildingSurfaces.Add(surface);
             }
-           
+
             return this;
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -223,7 +222,7 @@ namespace DynamoPlus
             var temp = "Building: ";
             temp += (Building != null) ? Building + "\n" : "not defiend\n";
             temp += "Zones:" + Zones.Count + "\n";
-            temp += "Surfaces:" + Surfaces.Count + "\n";
+            temp += "Surfaces:" + BuildingSurfaces.Count + "\n";
             temp += "Windows:" + FenestrationSurfaces.Count + "\n";
             temp += "Overhangs:" + ShadingOverhangs.Count + "\n";
             temp += "Shading Elements:" + ShadingSurfaces.Count + "\n";
