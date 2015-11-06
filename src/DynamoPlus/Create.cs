@@ -81,7 +81,7 @@ namespace DynamoPlus
                     {
                         buildingSurfaces.Add(surface.PointAtParameter(0.5, 0.5).Z > centerpoint.Z
                             ? new BuildingSurface(surface, zone, "default", "Roof")
-                            : new BuildingSurface(surface, zone, "default", "Floor"));
+                            : new BuildingSurface(surface, zone, "default", "Floor", "default", "Ground"));
                     }
                     else
                     {
@@ -89,6 +89,22 @@ namespace DynamoPlus
                     }
                 }
 
+                //Not working as intended...
+                //foreach (var surface in geometry)
+                //{
+                //    if (GetNormal(surface).IsAlmostEqualTo(Vector.ByCoordinates(0, 0, 1)))
+                //    {
+                //        buildingSurfaces.Add(new BuildingSurface(surface, zone, "default", "Roof"));
+                //    }
+                //    else if (GetNormal(surface).IsAlmostEqualTo(Vector.ByCoordinates(0, 0, -1)))
+                //    {
+                //        buildingSurfaces.Add(new BuildingSurface(surface, zone, "default", "Floor"));
+                //    }
+                //    else
+                //    {
+                //        buildingSurfaces.Add(new BuildingSurface(surface, zone));
+                //    }
+                //}
             }
 
             //elements.AddZones(zones);
@@ -100,6 +116,16 @@ namespace DynamoPlus
                 { "Zones", zones },
                 { "BuildingSurfaces", buildingSurfaces }
             };
+        }
+
+        private static Vector GetNormal(Surface surface)
+        {
+            var p1 = surface.Vertices[0].PointGeometry;
+            var p2 = surface.Vertices[1].PointGeometry;
+            var p3 = surface.Vertices[2].PointGeometry;
+            var normal = Vector.ByTwoPoints(p1, p2).Cross(Vector.ByTwoPoints(p2, p3));
+
+            return normal;
         }
     }
 }
