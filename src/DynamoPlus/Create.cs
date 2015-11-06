@@ -72,15 +72,16 @@ namespace DynamoPlus
 
                 zones.Add(zone);
 
+                var p = bb.MinPoint.Add(bb.MaxPoint.AsVector());
+                var centerpoint = Point.ByCoordinates(p.X/2, p.Y/2, p.Z/2);
+
                 foreach (var surface in geometry)
                 {
-                    if (Equals(surface.NormalAtParameter(0.5, 0.5), Vector.ByCoordinates(0, 0, 1)))
+                    if (surface.NormalAtParameter(0.5, 0.5).AngleBetween(Vector.ByCoordinates(0, 0, 1)) < 0.01)
                     {
-                        buildingSurfaces.Add(new BuildingSurface(surface, zone, "default", "Roof"));
-                    }
-                    else if (Equals(surface.NormalAtParameter(0.5, 0.5), Vector.ByCoordinates(0, 0, -1)))
-                    {
-                        buildingSurfaces.Add(new BuildingSurface(surface, zone, "default", "Floor"));
+                        buildingSurfaces.Add(surface.PointAtParameter(0.5, 0.5).Z > centerpoint.Z
+                            ? new BuildingSurface(surface, zone, "default", "Roof")
+                            : new BuildingSurface(surface, zone, "default", "Floor"));
                     }
                     else
                     {
