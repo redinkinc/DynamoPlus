@@ -24,6 +24,7 @@
 using System.Collections.Generic;
 using Autodesk.DesignScript.Geometry;
 using Autodesk.DesignScript.Runtime;
+using ProtoCore.Lang;
 
 namespace DynamoPlus
 {
@@ -116,6 +117,28 @@ namespace DynamoPlus
                 { "Zones", zones },
                 { "BuildingSurfaces", buildingSurfaces }
             };
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="buildingSurfaces"></param>
+        /// <returns></returns>
+        public static List<BuildingSurface> FindCorelatingBuildingSurfaces(List<BuildingSurface> buildingSurfaces)
+        {
+            for (int i = 0; i < buildingSurfaces.Count; i++)
+            {
+                for (int j = buildingSurfaces.Count - 1; j > i; j--)
+                {
+                    if (buildingSurfaces[i].Surface.IsAlmostEqualTo(buildingSurfaces[j].Surface))
+                    {
+                        buildingSurfaces[j].SetRelation(buildingSurfaces[i]);
+                        buildingSurfaces[i].SetRelation(buildingSurfaces[j]);
+                    }
+                }
+            }
+
+            return buildingSurfaces;
         }
 
         private static Vector GetNormal(Surface surface)

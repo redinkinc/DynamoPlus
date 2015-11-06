@@ -35,19 +35,39 @@ namespace DynamoPlus
     public class BuildingSurface:AbsElement
     {
         /// <summary>
-        /// 
+        /// The Surface Geometry representing the BuildingSurface
         /// </summary>
         public Surface Surface { get; set; }
+        /// <summary>
+        /// The Type of the BuildingSurface
+        /// </summary>
         private string Type { get; set; }
+        /// <summary>
+        /// The Construction of the BuildingSurface
+        /// </summary>
         private string ConstructionName { get; set; }
         private string ZoneName { get; set; }
+        /// <summary>
+        /// The Outside Boundary Condition of the BuildingSurface
+        /// </summary>
         private string BoundaryCondition { get; set; }
+        /// <summary>
+        /// The Outside Boundary Condition Object of the BuildingSurface
+        /// </summary>
+        private string BoundaryObject { get; set; }
         
         /// <summary>
         /// Counts the FenestrationSurfaces related to the surface. Each Surface counts as one FensestrationsSurfaces
         /// </summary>
+        [IsVisibleInDynamoLibrary(false)]
         public int FenestrationSurfacesNumber { get; set; }
+        /// <summary>
+        /// True if BuildingSurface is SunExposed
+        /// </summary>
         private bool SunExposed;
+        /// <summary>
+        /// True if BuildingSurface is WindExposed
+        /// </summary>
         private bool WindExposed;
 
         /// <summary>
@@ -81,6 +101,7 @@ namespace DynamoPlus
             Type = type;
             ConstructionName = constructionName == "default" ? GetDefault(type, boundaryCondition) : constructionName;
             BoundaryCondition = boundaryCondition;
+            BoundaryObject = "";
 
             if (boundaryCondition == "Outdoors")
             {
@@ -105,7 +126,7 @@ namespace DynamoPlus
         /// <param name="type">The Type of the BuildingSurface</param>
         /// <returns>A DynamoPlus BuildingSurface</returns>
         public BuildingSurface ByPoints(List<Point> points, Zone zone, string name = "default",
-            string constructionName = "default", string boundaryCondition = "external", string type = "Wall")
+            string constructionName = "default", string boundaryCondition = "Outdoors", string type = "Wall")
         {
             var surf = Surface.ByPerimeterPoints(points);
             return new BuildingSurface(surf, zone, name, constructionName, boundaryCondition, type);
@@ -130,11 +151,41 @@ namespace DynamoPlus
             {
                 construction = "003 Roof";
             }
+            else if (type == "Ceiling")
+            {
+                construction = "004 Ceiling";
+            }
             else
             {
                 construction = "001 Exterior Wall";
             }
             return construction;
+        }
+
+        /// <summary>
+        /// Sets the BuildingSurface in Relation to another one (BoundaryCondition is set to "Surface").
+        /// </summary>
+        /// <param name="otherBuildingSurface">The related BuildingSurface</param>
+        public void SetRelation(BuildingSurface otherBuildingSurface)
+        {
+            BoundaryCondition = "Surface";
+            BoundaryObject = otherBuildingSurface.Name;
+            SunExposed = false;
+            WindExposed = false;
+
+            switch (Type)
+            {
+                case "Roof":
+                    Type = "Ceiling";
+                    ConstructionName = GetDefault(Type, "Surface");
+                    break;
+                case "Wall":
+                    ConstructionName = GetDefault(Type, "Surface");
+                    break;
+                default:
+                    ConstructionName = GetDefault(Type, "Surface");
+                    break;
+            }
         }
 
         /// <summary>
@@ -151,7 +202,7 @@ namespace DynamoPlus
                 { "Construction Name", ConstructionName },
                 { "Zone Name", ZoneName },
                 { "Outside Boundary Condition", BoundaryCondition },
-                //{ "Surface", BoundaryConditionObject },
+                { "Outside Boundary Object", BoundaryObject },
                 { "SunExposed", SunExposed },
                 { "WindExposed", WindExposed }
                 //{ "View Factor to Ground", viewFactorToGround }
@@ -183,12 +234,12 @@ namespace DynamoPlus
             temp += ConstructionName + ",  !Construction Name\n";
             temp += ZoneName + ",  !Zone Name\n";
             temp += BoundaryCondition + ", !Outside Boundary Condition\n";
-            temp += ",              !- Outside Boundary Condition Object\n";
+            temp += BoundaryObject + ",    !- Outside Boundary Condition Object\n";
             temp +=  (SunExposed) ? "SunExposed" : "NoSun";
             temp += ",    !- Sun Exposure\n";
             temp += (WindExposed) ? "WindExposed" : "NoWind";
             temp += ",   !- Wind Exposure\n";
-            temp += ",              !- View Factor to Ground\n";
+            temp += ",   !- View Factor to Ground\n";
             temp += Surface.Vertices.Length + ",              !- Number of Vertices\n";
             for (var i = 0; i < Surface.Vertices.Length ; i++)
             {

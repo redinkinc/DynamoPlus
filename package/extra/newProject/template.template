@@ -483,6 +483,11 @@ Construction,
 	Roof Insulation [21],	 !- Layer 2
 	MAT-CC05 4 HW CONCRETE;	 !- Layer 3
 	
+Construction,
+	004 Ceiling,			 !- Name
+	CP02 CARPET PAD,	 !- Outside Layer
+	MAT-CC05 4 HW CONCRETE;
+	
 !-   ===========  ALL OBJECTS IN CLASS: GLOBALGEOMETRYRULES ===========
 GlobalGeometryRules,
     UpperLeftCorner,         !- Starting Vertex Position
