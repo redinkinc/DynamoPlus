@@ -60,8 +60,10 @@ namespace DynamoPlus
         /// <param name="boundaryCondition"></param>
         /// <param name="type">sets the type of the construction [external, internal, roof, ceiling, floor]</param>
         [IsVisibleInDynamoLibrary(false)]
-        public BuildingSurface(Surface surface, Zone zone, string name = "default", string type = "Wall", string constructionName = "default", string boundaryCondition = "external")
+        public BuildingSurface(Surface surface, Zone zone, string name = "default", string type = "Wall", string constructionName = "default", string boundaryCondition = "Outdoors")
         {
+            FenestrationSurfacesNumber = 1;
+
             if (name == "default")
             {
                 Name = zone.Name + " - Surface " + zone.SurfaceNumber;
@@ -70,13 +72,16 @@ namespace DynamoPlus
             {
                 Name = name;
             }
-            
-            ZoneName = zone.Name;
-            FenestrationSurfacesNumber = 1;
+
             Surface = surface;
-            ConstructionName = constructionName == "default" ? GetDefault(type, boundaryCondition) : constructionName;
+            ZoneName = zone.Name;
             zone.BuildingSurfaces.Add(this);
             zone.SurfaceNumber++;
+
+            Type = type;
+            ConstructionName = constructionName == "default" ? GetDefault(type, boundaryCondition) : constructionName;
+            BoundaryCondition = boundaryCondition;
+
             if (boundaryCondition == "Outdoors")
             {
                 SunExposed = true;
