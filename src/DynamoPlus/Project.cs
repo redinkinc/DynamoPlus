@@ -22,11 +22,14 @@
  */
 
 
+using Autodesk.DesignScript.Runtime;
+
 namespace DynamoPlus
 {
     /// <summary>
     /// The DynamoPlus Project.
     /// </summary>
+    [IsVisibleInDynamoLibrary(false)]
     public class Project
     {
         private string _name;
