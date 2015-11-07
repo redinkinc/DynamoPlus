@@ -57,7 +57,7 @@ namespace DynamoPlus
         private string BoundaryObject { get; set; }
         
         /// <summary>
-        /// Counts the FenestrationSurfaces related to the surface. Each Surface counts as one FensestrationsSurfaces
+        /// Counts the FenestrationSurfaces related to the Surface. Each Surface counts as one FensestrationsSurfaces
         /// </summary>
         [IsVisibleInDynamoLibrary(false)]
         public int FenestrationSurfacesNumber { get; set; }
@@ -71,7 +71,7 @@ namespace DynamoPlus
         private bool WindExposed;
 
         /// <summary>
-        /// Adds a surface by a List of Points
+        /// Adds a Surface by a List of Points
         /// </summary>
         /// <param name="surface">Dynamo Surface that represents the Building Surface</param>
         /// <param name="zone">Zone of the BuildingSurface</param>
@@ -222,7 +222,7 @@ namespace DynamoPlus
          
         // Retruns BuildingSurface:Detailed, http://bigladdersoftware.com/epx/docs/8-0/input-output-reference/page-011.html#buildingsurfacedetailed.
         /// <summary>
-        /// Writes the properties of the surface into one string
+        /// Writes the properties of the Surface into one string
         /// </summary>
         /// <returns>BuildingSurface:Detailed as String.</returns>
         [IsVisibleInDynamoLibrary(false)]

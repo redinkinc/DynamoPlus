@@ -102,13 +102,13 @@ namespace DynamoPlus
             {
                 //expects fenestrationSurface to be defined like:   3   2 
                 //                                                  0   1
-                //find a coordinateSystem where the fenestration surface lies in 
-                var vec1 = Vector.ByTwoPoints(shadingOverhang.FenestrationSurface.PointList[0], shadingOverhang.FenestrationSurface.PointList[1]);
-                var vec2 = Vector.ByTwoPoints(shadingOverhang.FenestrationSurface.PointList[0], shadingOverhang.FenestrationSurface.PointList[3]);
+                //find a coordinateSystem where the fenestration Surface lies in 
+                var vec1 = Vector.ByTwoPoints(shadingOverhang.FenestrationSurface.Surface.Vertices[0].PointGeometry, shadingOverhang.FenestrationSurface.Surface.Vertices[1].PointGeometry);
+                var vec2 = Vector.ByTwoPoints(shadingOverhang.FenestrationSurface.Surface.Vertices[0].PointGeometry, shadingOverhang.FenestrationSurface.Surface.Vertices[3].PointGeometry);
                 var length = vec1.Length;
                 //calculate new points for the ShadingOverhang
                 var points = new List<Point>();
-                var coordSystem = CoordinateSystem.ByOriginVectors(shadingOverhang.FenestrationSurface.PointList[3], vec1, vec2);
+                var coordSystem = CoordinateSystem.ByOriginVectors(shadingOverhang.FenestrationSurface.Surface.Vertices[3].PointGeometry, vec1, vec2);
                 points.Add(Point.ByCartesianCoordinates(coordSystem, -shadingOverhang.Extension, shadingOverhang.Height));
                 points.Add(Point.ByCartesianCoordinates(coordSystem, -shadingOverhang.Extension, shadingOverhang.Height,shadingOverhang.Depth));
                 points.Add(Point.ByCartesianCoordinates(coordSystem, length + shadingOverhang.Extension, shadingOverhang.Height, shadingOverhang.Depth));

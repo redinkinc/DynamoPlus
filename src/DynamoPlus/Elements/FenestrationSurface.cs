@@ -3,9 +3,9 @@
  *  
  *  Copyright (c) 2014-2015 Technische Universitaet Muenchen, 
  *  Chair of Computational Modeling and Simulation (https://www.cms.bgu.tum.de/)
- *  LEONHARD OBERMEYER CENTER (www.loc.tum.de)
+ *  LEONHARD OBERMEYER CENTER (http://www.loc.tum.de)
  *  
- *  Developed by Fabian Ritter, Florian Englberger
+ *  Developed by Fabian Ritter (contact: mailto:mail@redinkinc.de) and Florian Englberger
  * 
  *  DynamoPlus is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -40,7 +40,7 @@ namespace DynamoPlus
         /// <summary>
         /// 
         /// </summary>
-        public List<Point> PointList { get; set; }
+        public Surface Surface { get; set; }
         private string Type { get; set; }
         private string ConstructionName { get; set; }
         private string SurfaceName { get; set; }
@@ -53,32 +53,32 @@ namespace DynamoPlus
         /// </summary>
         public ShadingOverhang ShadingOverhang { get; set; }
 
-        private FenestrationSurface(BuildingSurface buildingSurface, List<Point> points)
+        private FenestrationSurface(Surface surface, BuildingSurface buildingSurface, string constructionName = "default")
         {
             Name = buildingSurface.Name + " - Window " + buildingSurface.FenestrationSurfacesNumber;
 
             Type = "Window";
-            ConstructionName = "000 Standard Window";
+
+            ConstructionName = constructionName == "default"
+                ? "000 Standard Window"
+                : constructionName;
+
             SurfaceName = buildingSurface.Name;
             BuildingSurface = buildingSurface;
-            PointList = points;
-            //CheckAngle(surface);
+            Surface = surface;
             buildingSurface.FenestrationSurfacesNumber++;
-            
         }
 
         //Get 'Fenestration Surface by Selected Surface
         /// <summary>
         /// Adds a Fenestration Surface in a Surface
         /// </summary>
-        /// <param name="facelist"></param>
         /// <param name="surface"></param>
+        /// <param name="buildingSurface"></param>
         /// <returns></returns>
-        public static List<FenestrationSurface> FenestrationSurfaceBySurfacelist (List<Face> facelist, BuildingSurface surface)
+        public static FenestrationSurface FenestrationSurfaceBySurface (Surface surface, BuildingSurface buildingSurface)
         {
-            return facelist.Select(face => face.Vertices.Select(
-                revitVertex => Point.ByCoordinates(revitVertex.PointGeometry.X/1000, revitVertex.PointGeometry.Y/1000, revitVertex.PointGeometry.Z/1000)).ToList()).
-                Select(points => new FenestrationSurface(surface, points)).ToList();
+            return new FenestrationSurface(surface, buildingSurface);
         }
 
         /// <summary>
@@ -98,26 +98,28 @@ namespace DynamoPlus
             var fenestrationsurfaceList = new List<FenestrationSurface>();
 
             // iterate over the surfaces
-            foreach (var surface in buildingSurfaces)
+            foreach (var buildingSurface in buildingSurfaces)
             {
                 
-                var vec1 = Vector.ByTwoPoints(surface.Surface.Vertices[0].PointGeometry, surface.Surface.Vertices[1].PointGeometry);
-                var vec2 = Vector.ByTwoPoints(surface.Surface.Vertices[0].PointGeometry, surface.Surface.Vertices[3].PointGeometry);
-                //calculate the distance from the border (offset) from the given surface
+                var vec1 = Vector.ByTwoPoints(buildingSurface.Surface.Vertices[0].PointGeometry, buildingSurface.Surface.Vertices[1].PointGeometry);
+                var vec2 = Vector.ByTwoPoints(buildingSurface.Surface.Vertices[0].PointGeometry, buildingSurface.Surface.Vertices[3].PointGeometry);
+                //calculate the distance from the border (offset) from the given Surface
                 var length = vec1.Length;
                 var height = vec2.Length;
                 var dist = ((height + length) - Math.Sqrt(Math.Pow(height, 2) + Math.Pow(length, 2) + (4*percentage - 2) * height * length))/4;
 
                 //calculate new points for the FenestrationSurface
                 var points = new List<Point>();
-                var coordSystem = CoordinateSystem.ByOriginVectors(surface.Surface.Vertices[0].PointGeometry, vec1, vec2);
+                var coordSystem = CoordinateSystem.ByOriginVectors(buildingSurface.Surface.Vertices[0].PointGeometry, vec1, vec2);
                 points.Add(Point.ByCartesianCoordinates(coordSystem, dist, dist));
                 points.Add(Point.ByCartesianCoordinates(coordSystem, length - dist, dist));
                 points.Add(Point.ByCartesianCoordinates(coordSystem, length - dist, height-dist));
                 points.Add(Point.ByCartesianCoordinates(coordSystem, dist, height - dist));
 
+                var surface = Surface.ByPerimeterPoints(points);
+
                 //add to List
-                fenestrationsurfaceList.Add(new FenestrationSurface(surface, points));
+                fenestrationsurfaceList.Add(new FenestrationSurface(surface, buildingSurface));
             }
             //return List
             return fenestrationsurfaceList;
@@ -148,17 +150,18 @@ namespace DynamoPlus
             temp += ",        !- Shading Control Name\n";
             temp += ",        !- Frame and Divider Name\n";
             temp += ",        !- Multiplier\n";
-            temp += ",        !- Number of Vertices\n";
-            for (var i = 0; i < PointList.Count; i++)
+            temp += Surface.Vertices.Length + ",              !- Number of Vertices\n";
+            for (var i = 0; i < Surface.Vertices.Length; i++)
             {
-                temp += PointList[i].X.ToString(CultureInfo.InvariantCulture) + ", " + PointList[i].Y.ToString(CultureInfo.InvariantCulture) + ", " + PointList[i].Z.ToString(CultureInfo.InvariantCulture);
-                if (i != PointList.Count - 1)
+                temp += Surface.Vertices[i].PointGeometry.X.ToString(CultureInfo.InvariantCulture) + ", " + Surface.Vertices[i].PointGeometry.Y.ToString(CultureInfo.InvariantCulture) + ", " + Surface.Vertices[i].PointGeometry.Z.ToString(CultureInfo.InvariantCulture);
+
+                if (i != Surface.Vertices.Length - 1)
                 {
-                    temp += ", ";
+                    temp += $", !- XYZ Coordinates Point {i + 1}\n";
                 }
                 else
                 {
-                    temp += ";\n";
+                    temp += $"; !- XYZ Coordinates Point {i + 1}\n";
                 }
             }
 
