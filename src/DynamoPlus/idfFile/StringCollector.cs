@@ -3,7 +3,7 @@
  *  
  *  Copyright (c) 2014-2015 Technische Universitaet Muenchen, 
  *  Chair of Computational Modeling and Simulation (https://www.cms.bgu.tum.de/)
- *  LEONHARD OBERMEYER CENTER (www.loc.tum.de)
+ *  LEONHARD OBERMEYER CENTER (https://www.loc.tum.de)
  *  
  *  Developed by Fabian Ritter (Contact: mailto:mail@redinkinc.de) and Florian Englberger
  * 

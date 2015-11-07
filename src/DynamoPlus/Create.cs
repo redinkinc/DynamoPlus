@@ -24,7 +24,6 @@
 using System.Collections.Generic;
 using Autodesk.DesignScript.Geometry;
 using Autodesk.DesignScript.Runtime;
-using ProtoCore.Lang;
 
 namespace DynamoPlus
 {
@@ -57,7 +56,7 @@ namespace DynamoPlus
         /// <param name="geometrySurfaces"></param>
         /// <returns></returns>
         [MultiReturn(new[] {"Zones", "BuildingSurfaces"})]
-        public static Dictionary<string, object> FromSurfaces(List<List<Surface>> geometrySurfaces)
+        public static Dictionary<string, object> BuildingSurfacesByGeometryGroups(List<List<Surface>> geometrySurfaces)
         {
             //var elements = new Elements();
             var zones = new List<Zone>();
@@ -76,36 +75,7 @@ namespace DynamoPlus
                 var p = bb.MinPoint.Add(bb.MaxPoint.AsVector());
                 var centerpoint = Point.ByCoordinates(p.X/2, p.Y/2, p.Z/2);
 
-                foreach (var surface in geometry)
-                {
-                    if (surface.NormalAtParameter(0.5, 0.5).AngleBetween(Vector.ByCoordinates(0, 0, 1)) < 0.01)
-                    {
-                        buildingSurfaces.Add(surface.PointAtParameter(0.5, 0.5).Z > centerpoint.Z
-                            ? new BuildingSurface(surface, zone, "default", "Roof")
-                            : new BuildingSurface(surface, zone, "default", "Floor", "default", "Ground"));
-                    }
-                    else
-                    {
-                        buildingSurfaces.Add(new BuildingSurface(surface, zone));
-                    }
-                }
-
-                //Not working as intended...
-                //foreach (var surface in geometry)
-                //{
-                //    if (GetNormal(surface).IsAlmostEqualTo(Vector.ByCoordinates(0, 0, 1)))
-                //    {
-                //        buildingSurfaces.Add(new BuildingSurface(surface, zone, "default", "Roof"));
-                //    }
-                //    else if (GetNormal(surface).IsAlmostEqualTo(Vector.ByCoordinates(0, 0, -1)))
-                //    {
-                //        buildingSurfaces.Add(new BuildingSurface(surface, zone, "default", "Floor"));
-                //    }
-                //    else
-                //    {
-                //        buildingSurfaces.Add(new BuildingSurface(surface, zone));
-                //    }
-                //}
+                buildingSurfaces.AddRange(BuildingSurfacesByOrientation(geometry, zone, centerpoint));
             }
 
             //elements.AddZones(zones);
@@ -117,6 +87,49 @@ namespace DynamoPlus
                 { "Zones", zones },
                 { "BuildingSurfaces", buildingSurfaces }
             };
+        }
+
+        //perhaps move to BuildingSurface?
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="surfaces"></param>
+        /// <param name="zone"></param>
+        /// <param name="centerpoint"></param>
+        public static List<BuildingSurface> BuildingSurfacesByOrientation(List<Surface> surfaces, Zone zone, Point centerpoint)
+        {
+            var buildingSurfaces = new List<BuildingSurface>();
+
+            foreach (var surface in surfaces)
+                if (surface.NormalAtParameter(0.5, 0.5).AngleBetween(Vector.ByCoordinates(0, 0, 1)) < 0.01)
+            {
+                buildingSurfaces.Add(surface.PointAtParameter(0.5, 0.5).Z > centerpoint.Z
+                    ? new BuildingSurface(surface, zone, "default", "Roof")
+                    : new BuildingSurface(surface, zone, "default", "Floor", "default", "Ground"));
+            }
+            else
+            {
+                buildingSurfaces.Add(new BuildingSurface(surface, zone));
+            }
+
+            //Not working as intended...
+            //foreach (var Surface in geometry)
+            //{
+            //    if (GetNormal(Surface).IsAlmostEqualTo(Vector.ByCoordinates(0, 0, 1)))
+            //    {
+            //        buildingSurfaces.Add(new BuildingSurface(Surface, zone, "default", "Roof"));
+            //    }
+            //    else if (GetNormal(Surface).IsAlmostEqualTo(Vector.ByCoordinates(0, 0, -1)))
+            //    {
+            //        buildingSurfaces.Add(new BuildingSurface(Surface, zone, "default", "Floor"));
+            //    }
+            //    else
+            //    {
+            //        buildingSurfaces.Add(new BuildingSurface(Surface, zone));
+            //    }
+            //}
+
+            return buildingSurfaces;
         }
 
         /// <summary>
@@ -141,6 +154,7 @@ namespace DynamoPlus
             return buildingSurfaces;
         }
 
+        //not working as intended.
         private static Vector GetNormal(Surface surface)
         {
             var p1 = surface.Vertices[0].PointGeometry;

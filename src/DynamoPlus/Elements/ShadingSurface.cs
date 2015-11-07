@@ -3,9 +3,9 @@
  *  
  *  Copyright (c) 2014-2015 Technische Universitaet Muenchen, 
  *  Chair of Computational Modeling and Simulation (https://www.cms.bgu.tum.de/)
- *  LEONHARD OBERMEYER CENTER (www.loc.tum.de)
+ *  LEONHARD OBERMEYER CENTER (https://www.loc.tum.de)
  *  
- *  Developed by Fabian Ritter, Florian Englberger
+ *  Developed by Fabian Ritter (Contact: mailto:mail@redinkinc.de) and Florian Englberger
  * 
  *  DynamoPlus is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -38,7 +38,7 @@ namespace DynamoPlus
         private bool IsFixed { get; set; }
 
         /// <summary>
-        /// Adds a shading surface by points and name
+        /// Adds a shading Surface by points and name
         /// </summary>
         /// <param name="points"></param>
         /// <param name="name"></param>
@@ -62,7 +62,7 @@ namespace DynamoPlus
         }
 
         /// <summary>
-        /// Writes the properties of the surface into one string
+        /// Writes the properties of the Surface into one string
         /// </summary>
         /// <returns></returns>
         [IsVisibleInDynamoLibrary(false)]
@@ -107,8 +107,7 @@ namespace DynamoPlus
         /// </summary>
         /// <param name="surfaces"></param>
         /// <returns></returns>
-        public static List<ShadingSurface> ShadingSurfacesBySurfaceList(
-            List<Surface> surfaces)
+        public static List<ShadingSurface> ShadingSurfacesBySurfaceList( List<Surface> surfaces )
         {
             var i = 0;
             var shadingSurfaces = new List<ShadingSurface>();
@@ -118,8 +117,8 @@ namespace DynamoPlus
                 foreach (var revitVertex in revitSurface.Vertices)
                 {
                     //Converts Vertex to point, should go easier
-                    var point = Point.ByCoordinates(revitVertex.PointGeometry.X/1000,
-                        revitVertex.PointGeometry.Y/1000, revitVertex.PointGeometry.Z/1000);
+                    var point = Point.ByCoordinates(revitVertex.PointGeometry.X,
+                        revitVertex.PointGeometry.Y/1000, revitVertex.PointGeometry.Z);
                     points.Add(point);
                 }
                 var name = "ShadingSurface " + i;

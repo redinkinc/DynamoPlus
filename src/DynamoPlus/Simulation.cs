@@ -21,6 +21,7 @@
  *  along with DynamoPlus. If not, see <http://www.gnu.org/licenses/>.
  */
 
+using System;
 using System.Diagnostics;
 using System.IO;
 
@@ -62,7 +63,7 @@ namespace DynamoPlus
             var e = proc.StandardError.ReadToEnd();
             if (e != "" || e != "RunEPlus executed succesfully")
             {
-                //throw new ArgumentException(e);
+                throw new ArgumentException(e);
             }
 
             //var result = proc.StandardOutput.ReadToEnd();

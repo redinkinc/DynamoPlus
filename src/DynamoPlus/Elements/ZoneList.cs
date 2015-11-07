@@ -59,7 +59,7 @@ namespace DynamoPlus
         }
 
         /// <summary>
-        /// Writes the properties of the surface into one string
+        /// Writes the properties of the Surface into one string
         /// </summary>
         /// <returns></returns>
         [IsVisibleInDynamoLibrary(false)]

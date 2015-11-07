@@ -45,6 +45,7 @@ namespace DynamoPlus
         /// <summary>
         /// Counter for surfaces
         /// </summary>
+        [IsVisibleInDynamoLibrary(false)]
         public int SurfaceNumber { get; set; }
 
         /// <summary>

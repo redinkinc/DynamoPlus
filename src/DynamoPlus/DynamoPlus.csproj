@@ -33,11 +33,11 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>C:\Program Files\Dynamo 0.8\nodes\</OutputPath>
+    <OutputPath>..\..\package\bin\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>0</WarningLevel>
-    <DocumentationFile>C:\Programme\Dynamo 0.8\nodes\DynamoPlus.xml</DocumentationFile>
+    <DocumentationFile>..\..\package\bin\DynamoPlus.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DSCoreNodes">
