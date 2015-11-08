@@ -1,4 +1,4 @@
-﻿/*
+/*
  *  This file is part of DynamoPlus.
  *  
  *  Copyright (c) 2014-2015 Technische Universitaet Muenchen, 
@@ -24,7 +24,7 @@
 
 using Autodesk.DesignScript.Runtime;
 
-namespace DynamoPlus
+namespace DynamoPlus.System
 {
     /// <summary>
     /// 

@@ -24,7 +24,7 @@
 
 using Autodesk.DesignScript.Runtime;
 
-namespace DynamoPlus
+namespace DynamoPlus.System
 {
     /// <summary>
     /// 

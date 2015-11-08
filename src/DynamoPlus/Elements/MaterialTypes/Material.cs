@@ -24,9 +24,8 @@
 using System;
 using System.Globalization;
 using System.Linq;
-using System.Threading;
 using Autodesk.DesignScript.Runtime;
-using DynamoPlus.idfFile;
+using DynamoPlus.File;
 
 namespace DynamoPlus
 {

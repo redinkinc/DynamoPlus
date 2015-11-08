@@ -23,24 +23,24 @@
 
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
+using Autodesk.DesignScript.Runtime;
 
-namespace DynamoPlus.idfFile
+namespace DynamoPlus.File
 {
     /// <summary>
     /// This class handles the idf File and stores all relevant information
     /// </summary>
-    public static class IdfFile
+    public static class Idf
     {
         //internal string TemplateFilepath { get; set; }
         //private string OutputFilepath { get; set; }
 
-        
         /// <summary>
         /// Reads the Results from the Simulation
         /// </summary>
         /// <param name="templateFilePath"></param>
         /// /// <returns></returns>
+        [IsVisibleInDynamoLibrary(false)]
         public static Dictionary<string, double[]> ReadResults(string templateFilePath)
         {
             var dict = new Dictionary<string, double[]>();
@@ -48,7 +48,7 @@ namespace DynamoPlus.idfFile
 
             foreach (var file in files)
             {
-                var lines = File.ReadAllLines(file);
+                var lines = global::System.IO.File.ReadAllLines(file);
 
                 var energyUse = "cooling";
                 var heatingEnergy = 0.0;
@@ -99,9 +99,9 @@ namespace DynamoPlus.idfFile
         {
             var filePath = directory + @"\" + name + ".idf";
 
-            if (File.Exists(filePath))
+            if (global::System.IO.File.Exists(filePath))
             {
-                File.Delete(filePath);
+                global::System.IO.File.Delete(filePath);
             }
 
             var filetext = StringCollector.GetIdfString(elements);

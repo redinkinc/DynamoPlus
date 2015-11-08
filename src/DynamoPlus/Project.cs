@@ -86,7 +86,7 @@ namespace DynamoPlus
         ///// <returns>True when successful!</returns>
         //public bool ExportToIdf()
         //{
-        //    var idfFile = new IdfFile(Directory);
+        //    var idfFile = new Idf(Directory);
         //    idfFile.WriteNewFile(Directory, _name, Elements);
         //    return true;
         //}

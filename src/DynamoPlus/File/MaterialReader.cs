@@ -21,7 +21,7 @@
  *  along with DynamoPlus. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace DynamoPlus
+namespace DynamoPlus.File
 {
     /// <summary>
     /// This class collects all different Materials so that it's easier to add new Material-Types

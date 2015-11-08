@@ -118,7 +118,7 @@ namespace DynamoPlus
                 {
                     //Converts Vertex to point, should go easier
                     var point = Point.ByCoordinates(revitVertex.PointGeometry.X,
-                        revitVertex.PointGeometry.Y/1000, revitVertex.PointGeometry.Z);
+                        revitVertex.PointGeometry.Y, revitVertex.PointGeometry.Z);
                     points.Add(point);
                 }
                 var name = "ShadingSurface " + i;

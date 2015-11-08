@@ -23,11 +23,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using Autodesk.DesignScript.Runtime;
 
-namespace DynamoPlus.idfFile
+namespace DynamoPlus.File
 {
     /// <summary>
     /// reads the template
@@ -40,7 +39,8 @@ namespace DynamoPlus.idfFile
         /// </summary>
         /// <param name="template">tamplate file (path)</param>
         /// <returns></returns>
-        [MultiReturn( new[] {"schedulesCompact", "schedulesYear", "construction", "materials", "materialsNoMass", "windowMaterials"})]
+        [MultiReturn( new[] {"Schedules:Compact", "Schedules:Year", "construction", "materials", "materialsNoMass", "windowMaterials"})]
+        [IsVisibleInDynamoLibrary(false)] //Hidden for current build. maybe used for setting defaults later.
         public static Dictionary<string, List<string>> ReadNames(string template)
         {
             return new Dictionary<string, List<string>>()
@@ -58,31 +58,39 @@ namespace DynamoPlus.idfFile
                 { "windowMaterials", new List<string>(GetNamesFromFileByKeyword(template, "WindowMaterial")) }
                 // windowMaterials.Insert(0, "default");
             };
-                        
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="templateFile"></param>
+        /// <returns></returns>
+        [MultiReturn(new[] { "Schedules:Compact", "Schedules:Year", "Schedule:Constant", "ScheduleTypeLimits" })]
+        public static Dictionary<string, List<string>> GetScheduleNames(string templateFile)
+        {
+            return new Dictionary<string, List<string>>()
+            {
+                { "schedules:Year", new List<string>(GetNamesFromFileByKeyword(templateFile, "Schedule:Year")) },
+                { "Schedule:Compact", new List<string>(GetNamesFromFileByKeyword(templateFile, "Schedule:Compact")) },
+                { "Schedule:Week:Compact", new List<string>(GetNamesFromFileByKeyword(templateFile, "Schedule:Week:Compact")) },
+                { "ScheduleTypeLimits", new List<string>(GetNamesFromFileByKeyword(templateFile, "ScheduleTypeLimits")) },
+                { "Schedule:Constant", new List<string>(GetNamesFromFileByKeyword(templateFile, "Schedule:Constant")) }
+            };
         }
 
         /// <summary>
         /// Reads in all pre-written Constructions, Materials and WindowMaterials from the template
         /// </summary>
-        /// <param name="templatePath"></param>
-        /// <returns></returns>
+        /// <param name="templateFile">The Filepath to the template file</param>
+        /// <returns>Construction, Materials and Windowmaterials as DynamoPlus Elements.</returns>
         [MultiReturn("constructions", "materials", "windowMaterials")]
-        public static Dictionary<string,NoDuplicateList<AbsElement>> ReadInClassesFromTemplate(string templatePath)       
+        public static Dictionary<string,NoDuplicateList<AbsElement>> GetConstrutionsAndMaterials(string templateFile)       
         {
             var constructions =new NoDuplicateList<AbsElement>();
-            constructions.AddNoDuplicateList(Construction.ReadInFromTemplate(templatePath));
+            constructions.AddNoDuplicateList(Construction.ReadInFromTemplate(templateFile));
 
-            var materials = MaterialReader.ReadMaterialsFromTemplate(templatePath);
-            //    new NoDuplicateList<IReadable>();
-            //materials.AddNoDuplicateList(Material.ReadInFromTemplate(templatePath));
-            //materials.AddNoDuplicateList(MaterialNoMass.ReadInFromTemplate(templatePath));
-            //materials.AddNoDuplicateList(MaterialAirGap.ReadInFromTemplate(templatePath));
-
-            var windowMaterials = MaterialReader.ReadWindowMaterialsFromTemplate(templatePath);
-            //    new NoDuplicateList<IReadable>();
-            //windowMaterials.AddNoDuplicateList(WindowMaterialGlazing.ReadInFromTemplate(templatePath));
-            //windowMaterials.AddNoDuplicateList(WindowMaterialSimpleGlazingSystem.ReadInFromTemplate(templatePath));
-            //windowMaterials.AddNoDuplicateList(WindowMaterialGas.ReadInFromTemplate(templatePath));
+            var materials = MaterialReader.ReadMaterialsFromTemplate(templateFile);
+            var windowMaterials = MaterialReader.ReadWindowMaterialsFromTemplate(templateFile);
               
             return new Dictionary<string, NoDuplicateList<AbsElement>>()
             {
@@ -94,8 +102,7 @@ namespace DynamoPlus.idfFile
 
         }
 
-
-            /// <summary>
+        /// <summary>
         /// Possibility to get the informations from the template File to a specific keyword 
         /// </summary>
         /// <param name="path"></param>
@@ -104,7 +111,7 @@ namespace DynamoPlus.idfFile
         [IsVisibleInDynamoLibrary(false)]
         public static IEnumerable<List<string>> GetDataFromFileByKeyword (string path, string keyword)
         {
-            var lines = File.ReadAllLines(path);
+            var lines = global::System.IO.File.ReadAllLines(path);
             var collector = new List<List<string>>();
 
             for (var i = 0; i < lines.Length; i++)

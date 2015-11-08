@@ -21,10 +21,10 @@
  *  along with DynamoPlus. If not, see <http://www.gnu.org/licenses/>.
  */
 
-using System.IO;
 using System.Linq;
+using DynamoPlus.System;
 
-namespace DynamoPlus.idfFile
+namespace DynamoPlus.File
 {
     static class StringCollector
     {
@@ -32,19 +32,28 @@ namespace DynamoPlus.idfFile
         {
             string[] settingStrings =
             {
-                GetGlobalGeometryRulesString(),
-                GetGroundTemperaturesString(),
-                GetOutputString(),
-                GetOutputVariableDictionaryString(),
-                GetProgramControlString(),
-                GetRunPeriodString(),
+                GetVersionString(),
                 GetSimulationControlString(),
+                GetProgramControlString(),
                 GetTimestepString(),
-                GetVersionString()
+                GetRunPeriodString(),
+                GetGlobalGeometryRulesString(),
+                GetGroundTemperaturesString()
             };
+
+            string[] hvacOutput =
+            {    
+                GetLightsString(),
+                GetElectricEquipmentString(),
+                GetZoneControlThermostatString(),
+                GetThermostatSetpointDualSetpointString(),
+                GetOutputVariableDictionaryString(),
+                GetOutputString()
+            };
+
             var elementsStrings = GetElementsStrings(elements);
             
-            return settingStrings.Concat(elementsStrings).ToArray();            
+            return settingStrings.Concat(elementsStrings.Concat(hvacOutput)).ToArray();            
         }
 
         static private string[] GetElementsStrings(Elements elements)
@@ -234,9 +243,9 @@ namespace DynamoPlus.idfFile
             text += "GlobalGeometryRules,\n";
             text += "    UpperLeftCorner,         !- Starting Vertex Position\n";
             text += "    Counterclockwise,        !- Vertex Entry Direction\n";
-            text += "    Relative,                !- Coordinate System\n";
+            text += "    World,                   !- Coordinate System\n";
             text += "    Relative,                !- Daylighting Reference Point Coordinate System\n";
-            text += "    Relative;                !- Rectangular Surface Coordinate System\n";
+            text += "    World;                   !- Rectangular Surface Coordinate System\n";
             return text;
         }
 
@@ -244,8 +253,67 @@ namespace DynamoPlus.idfFile
         {
             var text = GetHeadLine("OUTPUT:VARIABLEDICTIONARY");
             text += "Output:VariableDictionary,\n";
-            text += "    IDF,                     !- Key Field\n";
+            text += "    Idf,                     !- Key Field\n";
             text += "    Unsorted;                !- Sort Option\n";
+            return text;
+        }
+
+        private static string GetLightsString()
+        {
+            var text = GetHeadLine("LIGHTS");
+            text += "Lights,\n";
+            text += "    dinv18599 - 10 Grossraumbuero LightsInst,  !-Name\n";
+            text += "    DIN V 18599 - 10 A.3 Grossraumbuero,  !-Zone or ZoneList Name\n";
+            text += "    Beleuchtung - dinv18599 - 10a3,!-Schedule Name\n";
+            text += "    Watts / Area,            !-Design Level Calculation Method\n";
+            text += "    ,                        !-Lighting Level {W}\n";
+            text += "    9.68752354606417,        !-Watts per Zone Floor Area {W/m2}\n";
+            text += "    ,                        !-Watts per Person {W/person}\n";
+            text += "    ,                        !-Return Air Fraction\n";
+            text += "    ,                        !-Fraction Radiant\n";
+            text += "    ,                        !-Fraction Visible\n";
+            text += "    ,                        !-Fraction Replaceable\n";
+            text += "    Lights; !-End - Use Subcategory\n";
+            return text;
+        }
+
+        private static string GetElectricEquipmentString()
+        {
+            var text = GetHeadLine("ELECTRICEQUIPMENT");
+            text += "ElectricEquipment,\n";
+            text += "    dinv18599 -10 Grossraumbuero ElecInst,  !- Name\n";
+            text += "    DIN V 18599-10 A.3 Grossraumbuero,  !- Zone or ZoneList Name\n";
+            text += "    BetriebszeitHZG -dinv18599-10a3,!- Schedule Name\n";
+            text += "    Watts /Area,              !- Design Level Calculation Method\n";
+            text += "    ,                        !- Design Level { W }\n";
+            text += "    5.8125141276385,         !- Watts per Zone Floor Area {W/m2}\n";
+            text += "    ,                        !- Watts per Person {W/person}\n";
+            text += "    ,                        !- Fraction Latent\n";
+            text += "    ,                        !- Fraction Radiant\n";
+            text += "    ,                        !- Fraction Lost\n";
+            text += "    ElectricEquipment;       !- End-Use Subcategory\n";
+            return text;
+        }
+
+        private static string GetZoneControlThermostatString()
+        {
+            var text = GetHeadLine("ZONECONTROL:THERMOSTAT");
+            text += "ZoneControl:Thermostat,\n";
+            text += "    ZONE ONE Thermostat,     !- Name\n";
+            text += "    DIN V 18599-10 A.3 Grossraumbuero,                !- Zone or ZoneList Name\n";
+            text += "    ALWAYS 4,                !- Control Type Schedule Name\n";
+            text += "    ThermostatSetpoint:DualSetpoint,  !- Control 1 Object Type\n";
+            text += "    Office Thermostat Dual SP Control;  !- Control 1 Name\n";
+            return text;
+        }
+
+        private static string GetThermostatSetpointDualSetpointString()
+        {
+            var text = GetHeadLine("THERMOSTATSETPOINT:DUALSETPOINT");
+            text += "ThermostatSetpoint:DualSetpoint,\n";
+            text += "    Office Thermostat Dual SP Control,  !- Name\n";
+            text += "    ALWAYS 20,               !- Heating Setpoint Temperature Schedule Name\n";
+            text += "    ALWAYS 24;               !- Cooling Setpoint Temperature Schedule Name\n";
             return text;
         }
 
@@ -253,32 +321,25 @@ namespace DynamoPlus.idfFile
         {
             var text = GetHeadLine("OUTPUT");
             text += "Output:Table:SummaryReports,\n";
-            text += "	ZoneHeatingSummaryMonthly,  !- Report 3 Name\n";
+            text += "    ZoneHeatingSummaryMonthly,  !- Report 3 Name\n";
             text += "    ZoneCoolingSummaryMonthly;  !- Report 4 Name\n\n";
-            text += "OutputControl:Table:Style,\n";
+            text += "    OutputControl:Table:Style,\n";
             text += "    Comma,                    !- Column Separator\n";
-            text += "	JtokWh;                  !- Unit Conversion\n\n";
-            text += "Output:Variable,*,Ideal Loads Air Heating Rate,RunPeriod;\n";
-            text += "Output:Variable,*,Ideal Loads Air Total Cooling Rate,RunPeriod;\n";
-            text += "! HVAC,Sum,Zone Ideal Loads Supply Air Total Heating Energy [J]\n";
-            text += "! HVAC,Sum,Zone Ideal Loads Supply Air Total Cooling Energy [J]\n\n";
-            text += "Output:Diagnostics,\n";
+            text += "	 JtokWh;                  !- Unit Conversion\n\n";
+            text += "    Output:Variable,*,Ideal Loads Air Heating Rate,RunPeriod;\n";
+            text += "    Output:Variable,*,Ideal Loads Air Total Cooling Rate,RunPeriod;\n";
+            text += "    ! HVAC,Sum,Zone Ideal Loads Supply Air Total Heating Energy [J]\n";
+            text += "    ! HVAC,Sum,Zone Ideal Loads Supply Air Total Cooling Energy [J]\n\n";
+            text += "    Output:Diagnostics,\n";
             text += "    ! DisplayExtraWarnings;    !- Key 1\n";
-            text += "	DisplayAllWarnings;    !- Key 1\n";
+            text += "	 DisplayAllWarnings;    !- Key 1\n";
             return text;
-        }
-
-        internal static string[] GetRest(string directory)
-        {
-            var path = directory + @"\Rest.template";
-            return File.ReadAllLines(path);
-            
         }
 
         internal static string[] GetSchedules(string directory)
         {
             var path = directory + @"\Schedules.template";
-            return File.ReadAllLines(path);
+            return global::System.IO.File.ReadAllLines(path);
 
         }
     }
