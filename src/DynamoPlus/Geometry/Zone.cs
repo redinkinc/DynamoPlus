@@ -27,7 +27,7 @@ using System.Globalization;
 using Autodesk.DesignScript.Geometry;
 using Autodesk.DesignScript.Runtime;
 
-namespace DynamoPlus
+namespace DynamoPlus.Geometry
 {
     //Defines the zones 
     /// <summary>

@@ -21,7 +21,7 @@
  *  along with DynamoPlus. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace DynamoPlus.Loads
+namespace DynamoPlus.Gains
 {
     /// <summary>
     /// The energyPlus People element
@@ -49,6 +49,7 @@ namespace DynamoPlus.Loads
         /// <param name="activityLevelSchuleName"></param>
         public People(string zoneName, string numOfPeopleScheduleName, string activityLevelSchuleName)
         {
+            Name = zoneName + " PeopleInst";
             ZoneName = zoneName;
             NumOfPeopleScheduleName = numOfPeopleScheduleName;
             ActivityLevelScheduleName = activityLevelSchuleName;
@@ -62,7 +63,7 @@ namespace DynamoPlus.Loads
         /// </returns>
         public override string ToString()
         {
-            return ZoneName + " PeopInst";
+            return Name;
         }
 
         /// <summary>
@@ -72,10 +73,10 @@ namespace DynamoPlus.Loads
         public override string Write()
         {
             var text = "People,\n";
-            text += "    " + ZoneName + " PeopInst,  !-Name\n";
+            text += "    " + Name + ",  !-Name\n";
             text += "    " + ZoneName + ",  !-Zone or ZoneList Name\n";
             text += "    " + NumOfPeopleScheduleName + ",  !-Number of People Schedule Name\n";
-            text += "    People / Area,             !-Number of People Calculation Method\n";
+            text += "    People/Area,             !-Number of People Calculation Method\n";
             text += "    0,                       !-Number of People\n";
             text += "    0.0538195752559121,      !-People per Zone Floor Area { person / m2}\n";
             text += "    ,                        !-Zone Floor Area per Person { m2 / person}\n";

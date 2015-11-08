@@ -21,14 +21,17 @@
  *  along with DynamoPlus. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace DynamoPlus.Loads
+namespace DynamoPlus.Gains
 {
-    class ElectricEquipment : AbsElement
+    /// <summary>
+    /// The EnergyPlus ElectricEquipment.
+    /// </summary>
+    public class ElectricEquipment : AbsElement
     {
         /// <summary>
         /// The Name of the corresponding Zone or ZoneList
         /// </summary>
-        public Zone ZoneName { get; set; }
+        public string ZoneName { get; set; }
         /// <summary>
         /// The Name of the Lights control schedule.
         /// </summary>
@@ -39,8 +42,9 @@ namespace DynamoPlus.Loads
         /// </summary>
         /// <param name="zoneName"></param>
         /// <param name="scheduleName"></param>
-        public ElectricEquipment(Zone zoneName, string scheduleName)
+        public ElectricEquipment(string zoneName, string scheduleName)
         {
+            Name = zoneName + " ElectricInst";
             ZoneName = zoneName;
             ScheduleName = scheduleName;
         }
@@ -53,7 +57,7 @@ namespace DynamoPlus.Loads
         /// </returns>
         public override string ToString()
         {
-            return ZoneName + "ElecInst";
+            return Name;
         }
 
         /// <summary>
@@ -63,11 +67,11 @@ namespace DynamoPlus.Loads
         public override string Write()
         {
             var text = "ElectricEquipment,\n";
-            text += "    " + ZoneName + " LightsInst,  !-Name\n";
+            text += "    " + Name + ",  !-Name\n";
             text += "    " + ZoneName + ",  !-Zone or ZoneList Name\n";
             text += "    " + ScheduleName + ",!-Schedule Name\n";
-            text += "    Watts /Area,              !- Design Level Calculation Method\n";
-            text += "    ,                        !- Design Level { W }\n";
+            text += "    Watts/Area,              !- Design Level Calculation Method\n";
+            text += "    ,                        !- Design Level {W}\n";
             text += "    5.8125141276385,         !- Watts per Zone Floor Area {W/m2}\n";
             text += "    ,                        !- Watts per Person {W/person}\n";
             text += "    ,                        !- Fraction Latent\n";

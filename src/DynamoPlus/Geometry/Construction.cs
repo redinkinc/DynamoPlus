@@ -25,7 +25,7 @@ using System.Collections.Generic;
 using Autodesk.DesignScript.Runtime;
 using DynamoPlus.File;
 
-namespace DynamoPlus
+namespace DynamoPlus.Geometry
 {
     /// <summary>
     /// The EnergyPlus Construction Element.

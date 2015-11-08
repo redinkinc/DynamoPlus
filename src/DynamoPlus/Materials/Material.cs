@@ -3,9 +3,9 @@
  *  
  *  Copyright (c) 2014-2015 Technische Universitaet Muenchen, 
  *  Chair of Computational Modeling and Simulation (https://www.cms.bgu.tum.de/)
- *  LEONHARD OBERMEYER CENTER (www.loc.tum.de)
+ *  LEONHARD OBERMEYER CENTER (http://www.loc.tum.de)
  *  
- *  Developed by Fabian Ritter, Florian Englberger
+ *  Developed by Fabian Ritter (contact: mailto:mail@redinkinc.de) and Florian Englberger
  * 
  *  DynamoPlus is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -21,13 +21,14 @@
  *  along with DynamoPlus. If not, see <http://www.gnu.org/licenses/>.
  */
 
+
 using System;
 using System.Globalization;
 using System.Linq;
 using Autodesk.DesignScript.Runtime;
 using DynamoPlus.File;
 
-namespace DynamoPlus
+namespace DynamoPlus.Materials
 {
     /// <summary>
     /// The EnergyPlus Material Element.

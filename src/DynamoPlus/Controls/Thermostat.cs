@@ -43,6 +43,7 @@ namespace DynamoPlus.Controls
         /// <param name="coolingSpTempScheduleName">The name of the Schedule controling the cooling setpoint temperature</param>
         public Thermostat(string zoneName, string heatingSpTempScheduleName, string coolingSpTempScheduleName)
         {
+            Name = zoneName + " Thermostat";
             ZoneName = zoneName;
             HeatingSpTempScheduleName = heatingSpTempScheduleName;
             CoolingSpTempScheduleName = coolingSpTempScheduleName;
@@ -56,7 +57,7 @@ namespace DynamoPlus.Controls
         /// </returns>
         public override string ToString()
         {
-            return ZoneName + " Thermostat (DualSetpoint)";
+            return Name + " (DualSetpoint)";
         }
 
         /// <summary>
@@ -66,7 +67,7 @@ namespace DynamoPlus.Controls
         public override string Write()
         {
             var text = "ZoneControl:Thermostat,\n";
-            text += "    " + ZoneName + " Thermostat,     !- Name\n";
+            text += "    " + Name + ",     !- Name\n";
             text += "    " + ZoneName + ",                !- Zone or ZoneList Name\n";
             text += "    ALWAYS 4,                !- Control Type Schedule Name\n";
             text += "    ThermostatSetpoint:DualSetpoint,  !- Control 1 Object Type\n";

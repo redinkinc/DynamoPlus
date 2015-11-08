@@ -25,6 +25,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Autodesk.DesignScript.Runtime;
+using DynamoPlus.Geometry;
 
 namespace DynamoPlus.File
 {
@@ -65,12 +66,12 @@ namespace DynamoPlus.File
         /// </summary>
         /// <param name="templateFile"></param>
         /// <returns></returns>
-        [MultiReturn(new[] { "Schedules:Compact", "Schedules:Year", "Schedule:Constant", "ScheduleTypeLimits" })]
+        [MultiReturn(new[] { "Schedule:Compact", "Schedule:Year", "Schedule:Constant", "ScheduleTypeLimits" })]
         public static Dictionary<string, List<string>> GetScheduleNames(string templateFile)
         {
             return new Dictionary<string, List<string>>()
             {
-                { "schedules:Year", new List<string>(GetNamesFromFileByKeyword(templateFile, "Schedule:Year")) },
+                { "Schedule:Year", new List<string>(GetNamesFromFileByKeyword(templateFile, "Schedule:Year")) },
                 { "Schedule:Compact", new List<string>(GetNamesFromFileByKeyword(templateFile, "Schedule:Compact")) },
                 { "Schedule:Week:Compact", new List<string>(GetNamesFromFileByKeyword(templateFile, "Schedule:Week:Compact")) },
                 { "ScheduleTypeLimits", new List<string>(GetNamesFromFileByKeyword(templateFile, "ScheduleTypeLimits")) },

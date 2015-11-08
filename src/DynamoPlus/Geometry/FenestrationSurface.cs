@@ -24,11 +24,10 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using Autodesk.DesignScript.Geometry;
 using Autodesk.DesignScript.Runtime;
 
-namespace DynamoPlus
+namespace DynamoPlus.Geometry
 
 {
     //At the Moment to build Standard Windows, but easily extendable to other windows or doors, etc.

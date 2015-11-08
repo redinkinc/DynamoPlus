@@ -24,6 +24,7 @@
 using System.Collections.Generic;
 using Autodesk.DesignScript.Geometry;
 using Autodesk.DesignScript.Runtime;
+using DynamoPlus.Geometry;
 
 namespace DynamoPlus
 {
@@ -37,7 +38,7 @@ namespace DynamoPlus
         /// </summary>
         /// <returns>All Elements from the geometry.</returns>
         [IsVisibleInDynamoLibrary(false)] //not working yet, so hidden in library...
-        public static Elements FromGeometry(List<Geometry> geometry)
+        public static Elements FromGeometry(List<Autodesk.DesignScript.Geometry.Geometry> geometry)
         {
             var elements = new Elements();
             var surfaces = new List<List<Surface>>();

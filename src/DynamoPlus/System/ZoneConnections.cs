@@ -22,6 +22,7 @@
  */
 
 using Autodesk.DesignScript.Runtime;
+using DynamoPlus.Geometry;
 
 namespace DynamoPlus.System
 {

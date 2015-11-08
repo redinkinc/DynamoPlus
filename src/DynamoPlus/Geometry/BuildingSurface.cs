@@ -23,14 +23,14 @@
 
 using System.Collections.Generic;
 using System.Globalization;
-using Autodesk.DesignScript.Runtime;
 using Autodesk.DesignScript.Geometry;
+using Autodesk.DesignScript.Runtime;
 
-namespace DynamoPlus
+namespace DynamoPlus.Geometry
 {
     
     /// <summary>
-    /// Surfaces are surfaces of the main building like walls floors etc.
+    /// BuildingSurfaces are surfaces of the main building like walls, floors etc.
     /// </summary>
     public class BuildingSurface:AbsElement
     {

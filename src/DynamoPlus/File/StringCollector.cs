@@ -22,6 +22,7 @@
  */
 
 using System.Linq;
+using DynamoPlus.Geometry;
 using DynamoPlus.System;
 
 namespace DynamoPlus.File
@@ -38,22 +39,14 @@ namespace DynamoPlus.File
                 GetTimestepString(),
                 GetRunPeriodString(),
                 GetGlobalGeometryRulesString(),
-                GetGroundTemperaturesString()
-            };
-
-            string[] hvacOutput =
-            {    
-                GetLightsString(),
-                GetElectricEquipmentString(),
-                GetZoneControlThermostatString(),
-                GetThermostatSetpointDualSetpointString(),
+                GetGroundTemperaturesString(),
                 GetOutputVariableDictionaryString(),
                 GetOutputString()
             };
 
             var elementsStrings = GetElementsStrings(elements);
             
-            return settingStrings.Concat(elementsStrings.Concat(hvacOutput)).ToArray();            
+            return settingStrings.Concat(elementsStrings).ToArray();            
         }
 
         static private string[] GetElementsStrings(Elements elements)
@@ -70,6 +63,11 @@ namespace DynamoPlus.File
             var hvacEquipmentConnections = "";
             var hvacEquipementLists = "";
             var hvacIdealLoads = "";
+
+            var lights = "";
+            var peoples = "";
+            var electricEquipments = "";
+            var thermostats = "";
 
             //Allways checks if the lists are full and writes a message in the idf-File if not
             var building = elements.Building == null ? "!No Building defined\n" : elements.Building.Write();
@@ -114,7 +112,8 @@ namespace DynamoPlus.File
             }
             else
             {
-                fenestrationSurfaces = elements.FenestrationSurfaces.Aggregate(fenestrationSurfaces, (current, fenestrationSurface) => current + fenestrationSurface.Write());
+                fenestrationSurfaces = elements.FenestrationSurfaces.Aggregate(fenestrationSurfaces, 
+                    (current, fenestrationSurface) => current + fenestrationSurface.Write());
             }
 
             if (elements.ShadingSurfaces.Count == 0)
@@ -123,7 +122,8 @@ namespace DynamoPlus.File
             }
             else
             {
-                shadingSurfaces = elements.ShadingSurfaces.Aggregate(shadingSurfaces, (current, shadingSurface) => current + shadingSurface.Write());
+                shadingSurfaces = elements.ShadingSurfaces.Aggregate(shadingSurfaces, 
+                    (current, shadingSurface) => current + shadingSurface.Write());
             }
 
             if (elements.ShadingOverhangs.Count == 0)
@@ -132,7 +132,8 @@ namespace DynamoPlus.File
             }
             else
             {
-                shadingOverhangs = elements.ShadingOverhangs.Aggregate(shadingOverhangs, (current, shadingOverhang) => current + shadingOverhang.Write());
+                shadingOverhangs = elements.ShadingOverhangs.Aggregate(shadingOverhangs, 
+                    (current, shadingOverhang) => current + shadingOverhang.Write());
             }
 
             if (elements.Materials.Count == 0)
@@ -141,7 +142,8 @@ namespace DynamoPlus.File
             }
             else
             {
-                materials = elements.Materials.Aggregate(materials, (current, material) => current + material.Write());
+                materials = elements.Materials.Aggregate(materials, 
+                    (current, material) => current + material.Write());
             }
 
             if (elements.Constructions.Count == 0)
@@ -150,7 +152,44 @@ namespace DynamoPlus.File
             }
             else
             {
-                constructions = elements.Constructions.Aggregate(constructions, (current, construction) => current + construction.Write());
+                constructions = elements.Constructions.Aggregate(constructions, 
+                    (current, construction) => current + construction.Write());
+            }
+
+            if (elements.Lights.Count == 0)
+            {
+                lights += "!No Lights defined\n";
+            }
+            else
+            {
+                lights = elements.Lights.Aggregate(lights, (current, light) => current + light.Write());
+            }
+
+            if (elements.Peoples.Count == 0)
+            {
+                peoples += "!No People defined\n";
+            }
+            else
+            {
+                peoples = elements.Peoples.Aggregate(peoples, (current, people) => current + people.Write());
+            }
+
+            if (elements.ElectricEquipments.Count == 0)
+            {
+                electricEquipments += "!No ElectricEquipment defined\n";
+            }
+            else
+            {
+                electricEquipments = elements.ElectricEquipments.Aggregate(electricEquipments, (current, electricEquipment) => current + electricEquipment.Write());
+            }
+
+            if (elements.Thermostats.Count == 0)
+            {
+                thermostats += "!No Thermostats defined\n";
+            }
+            else
+            {
+                thermostats = elements.Thermostats.Aggregate(thermostats, (current, thermostat) => current + thermostat.Write());
             }
 
             string[] lines =
@@ -164,9 +203,13 @@ namespace DynamoPlus.File
                 GetHeadLine("SHADINHOVERHANG")+shadingOverhangs,
                 GetHeadLine("MATERIAL")+materials,
                 GetHeadLine("CONSTRUCTION")+constructions,
-                GetHeadLine("HVAYEQUIPMENTCONNECTIONS")+hvacEquipmentConnections,
-                GetHeadLine("HVACEQUIPMENTLIST")+hvacEquipementLists,
-                GetHeadLine("HVACIDEALLOADS")+hvacIdealLoads
+                GetHeadLine("HVAC:EQUIPMENTCONNECTIONS")+hvacEquipmentConnections,
+                GetHeadLine("HVAC:EQUIPMENTLIST")+hvacEquipementLists,
+                GetHeadLine("HVAC:IDEALLOADS")+hvacIdealLoads,
+                GetHeadLine("LIGHTS")+lights,
+                GetHeadLine("PEOPLES")+peoples,
+                GetHeadLine("ELECTRICEQUIPMENT")+electricEquipments,
+                GetHeadLine("ZONECONTROL:THERMOSTATS")+thermostats
             };
             return lines;
         }
@@ -177,7 +220,7 @@ namespace DynamoPlus.File
             return "\n!-   ===========  ALL OBJECTS IN CLASS: " + classname + "===========\n\n";
         }
 
-        static private string GetVersionString()
+        private static string GetVersionString()
         {
             var versionText = GetHeadLine("VERSION");
             versionText += "Version,\n";
@@ -185,7 +228,7 @@ namespace DynamoPlus.File
             return versionText;
         }
 
-        static private string GetSimulationControlString()
+        private static string GetSimulationControlString()
         {
             var text = GetHeadLine("SIMULATIONCONTROL");
             text += "SimulationControl,\n";
@@ -197,21 +240,21 @@ namespace DynamoPlus.File
             return text;
         }
 
-        static private string GetTimestepString()
+        private static string GetTimestepString()
         {
             var text = GetHeadLine("TIMESTEP");
             text += "Timestep, 6;                       !- Number of Timesteps per Hour\n";
             return text;
         }
 
-        static private string GetProgramControlString()
+        private static string GetProgramControlString()
         {
             var text = GetHeadLine("PROGRAMCONTROL");
             text += "ProgramControl, 1;                       !- Number of Threads Allowed\n";
             return text;
         }
 
-        static private string GetRunPeriodString()
+        private static string GetRunPeriodString()
         {
             var text = GetHeadLine("RUNPERIOD");
             text += "RunPeriod,\n";
@@ -230,14 +273,14 @@ namespace DynamoPlus.File
             return text;
         }
 
-        static private string GetGroundTemperaturesString()
+        private static string GetGroundTemperaturesString()
         {
             var text = GetHeadLine("GROUNDTEMPERATURES");
             text += "Site:GroundTemperature:BuildingSurface,18.3,18.2,18.3,18.4,20.1,22.0,22.3,22.5,22.5,20.7,18.9,18.5;\n";
             return text;
         }
 
-        static private string GetGlobalGeometryRulesString()
+        private static string GetGlobalGeometryRulesString()
         {
             var text = GetHeadLine("GLOBALGEOMETRYRULES");
             text += "GlobalGeometryRules,\n";
@@ -249,71 +292,12 @@ namespace DynamoPlus.File
             return text;
         }
 
-        static private string GetOutputVariableDictionaryString()
+        private static string GetOutputVariableDictionaryString()
         {
             var text = GetHeadLine("OUTPUT:VARIABLEDICTIONARY");
             text += "Output:VariableDictionary,\n";
             text += "    Idf,                     !- Key Field\n";
             text += "    Unsorted;                !- Sort Option\n";
-            return text;
-        }
-
-        private static string GetLightsString()
-        {
-            var text = GetHeadLine("LIGHTS");
-            text += "Lights,\n";
-            text += "    dinv18599 - 10 Grossraumbuero LightsInst,  !-Name\n";
-            text += "    DIN V 18599 - 10 A.3 Grossraumbuero,  !-Zone or ZoneList Name\n";
-            text += "    Beleuchtung - dinv18599 - 10a3,!-Schedule Name\n";
-            text += "    Watts / Area,            !-Design Level Calculation Method\n";
-            text += "    ,                        !-Lighting Level {W}\n";
-            text += "    9.68752354606417,        !-Watts per Zone Floor Area {W/m2}\n";
-            text += "    ,                        !-Watts per Person {W/person}\n";
-            text += "    ,                        !-Return Air Fraction\n";
-            text += "    ,                        !-Fraction Radiant\n";
-            text += "    ,                        !-Fraction Visible\n";
-            text += "    ,                        !-Fraction Replaceable\n";
-            text += "    Lights; !-End - Use Subcategory\n";
-            return text;
-        }
-
-        private static string GetElectricEquipmentString()
-        {
-            var text = GetHeadLine("ELECTRICEQUIPMENT");
-            text += "ElectricEquipment,\n";
-            text += "    dinv18599 -10 Grossraumbuero ElecInst,  !- Name\n";
-            text += "    DIN V 18599-10 A.3 Grossraumbuero,  !- Zone or ZoneList Name\n";
-            text += "    BetriebszeitHZG -dinv18599-10a3,!- Schedule Name\n";
-            text += "    Watts /Area,              !- Design Level Calculation Method\n";
-            text += "    ,                        !- Design Level { W }\n";
-            text += "    5.8125141276385,         !- Watts per Zone Floor Area {W/m2}\n";
-            text += "    ,                        !- Watts per Person {W/person}\n";
-            text += "    ,                        !- Fraction Latent\n";
-            text += "    ,                        !- Fraction Radiant\n";
-            text += "    ,                        !- Fraction Lost\n";
-            text += "    ElectricEquipment;       !- End-Use Subcategory\n";
-            return text;
-        }
-
-        private static string GetZoneControlThermostatString()
-        {
-            var text = GetHeadLine("ZONECONTROL:THERMOSTAT");
-            text += "ZoneControl:Thermostat,\n";
-            text += "    ZONE ONE Thermostat,     !- Name\n";
-            text += "    DIN V 18599-10 A.3 Grossraumbuero,                !- Zone or ZoneList Name\n";
-            text += "    ALWAYS 4,                !- Control Type Schedule Name\n";
-            text += "    ThermostatSetpoint:DualSetpoint,  !- Control 1 Object Type\n";
-            text += "    Office Thermostat Dual SP Control;  !- Control 1 Name\n";
-            return text;
-        }
-
-        private static string GetThermostatSetpointDualSetpointString()
-        {
-            var text = GetHeadLine("THERMOSTATSETPOINT:DUALSETPOINT");
-            text += "ThermostatSetpoint:DualSetpoint,\n";
-            text += "    Office Thermostat Dual SP Control,  !- Name\n";
-            text += "    ALWAYS 20,               !- Heating Setpoint Temperature Schedule Name\n";
-            text += "    ALWAYS 24;               !- Cooling Setpoint Temperature Schedule Name\n";
             return text;
         }
 

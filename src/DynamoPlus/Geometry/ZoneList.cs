@@ -24,7 +24,7 @@
 using System.Collections.Generic;
 using Autodesk.DesignScript.Runtime;
 
-namespace DynamoPlus
+namespace DynamoPlus.Geometry
 
 {
     /// <summary>

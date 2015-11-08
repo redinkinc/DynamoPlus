@@ -23,6 +23,10 @@
 
 using System.Collections.Generic;
 using Autodesk.DesignScript.Runtime;
+using DynamoPlus.Controls;
+using DynamoPlus.Gains;
+using DynamoPlus.Geometry;
+using DynamoPlus.Materials;
 
 namespace DynamoPlus
 {
@@ -70,7 +74,25 @@ namespace DynamoPlus
         /// </summary>
         public NoDuplicateList<Construction> Constructions { get; set; }
 
-            /// <summary>
+        /// <summary>
+        /// List of Lights
+        /// </summary>
+        public NoDuplicateList<Lights> Lights { get; set; }
+        /// <summary>
+        /// List of Loads
+        /// </summary>
+        public NoDuplicateList<People> Peoples { get; set; }
+        /// <summary>
+        /// List of Loads
+        /// </summary>
+        public NoDuplicateList<ElectricEquipment> ElectricEquipments { get; set; }
+
+        /// <summary>
+        /// List of Thermostats
+        /// </summary>
+        public NoDuplicateList<Thermostat> Thermostats { get; set; }
+
+        /// <summary>
         /// 
         /// </summary>
         [IsVisibleInDynamoLibrary(false)]
@@ -84,6 +106,10 @@ namespace DynamoPlus
             ShadingOverhangs = new NoDuplicateList<ShadingOverhang>();
             Materials = new NoDuplicateList<Material>();      
             Constructions = new NoDuplicateList<Construction>();
+            Lights = new NoDuplicateList<Lights>();
+            Peoples = new NoDuplicateList<People>();
+            ElectricEquipments = new NoDuplicateList<ElectricEquipment>();
+            Thermostats = new NoDuplicateList<Thermostat>();
         }
 
         /// <summary>
@@ -207,6 +233,71 @@ namespace DynamoPlus
             foreach (var construction  in constructions)
             {
                 Constructions.Add(construction);
+            }
+            return this;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="lights"></param>
+        /// <returns>The Elements object.</returns>
+        public Elements AddLigths(List<Lights> lights)
+        {
+            foreach (var light in lights)
+            {
+                Lights.Add(light);
+            }
+            return this;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="peoples"></param>
+        /// <returns>The Elements object.</returns>
+        public Elements AddPeople(List<People> peoples)
+        {
+            foreach (var people in peoples)
+            {
+                Peoples.Add(people);
+            }
+            return this;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="electricEquipments"></param>
+        /// <returns>The Elements object.</returns>
+        public Elements AddElectricEquipment(List<ElectricEquipment> electricEquipments)
+        {
+            foreach (var electricEquipment in electricEquipments)
+            {
+                ElectricEquipments.Add(electricEquipment);
+            }
+            return this;
+        }
+
+        // Alternative to get rid of to much Add Functions...
+
+        //public Elements AddGains(List<AbsElement> gains)
+        //{
+        //    foreach (var gain in gains)
+        //    {
+        //        Gains.Add(gain);
+        //    }
+        //    return this;
+        //}
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="thermostats"></param>
+        /// <returns>The Elements object.</returns>
+        public Elements AddThermostats(List<Thermostat> thermostats)
+        {
+            foreach (var thermostat in thermostats)
+            {
+                Thermostats.Add(thermostat);
             }
             return this;
         }

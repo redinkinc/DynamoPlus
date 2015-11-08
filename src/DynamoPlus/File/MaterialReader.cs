@@ -21,6 +21,8 @@
  *  along with DynamoPlus. If not, see <http://www.gnu.org/licenses/>.
  */
 
+using DynamoPlus.Materials;
+
 namespace DynamoPlus.File
 {
     /// <summary>

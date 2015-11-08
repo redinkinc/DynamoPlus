@@ -26,7 +26,7 @@ using System.Globalization;
 using Autodesk.DesignScript.Geometry;
 using Autodesk.DesignScript.Runtime;
 
-namespace DynamoPlus
+namespace DynamoPlus.Geometry
 {
     /// <summary>
     /// Used to define Shading Overhangs above a FenestrationSurface

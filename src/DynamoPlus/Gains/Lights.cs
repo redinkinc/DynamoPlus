@@ -21,7 +21,7 @@
  *  along with DynamoPlus. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace DynamoPlus.Loads
+namespace DynamoPlus.Gains
 {
     /// <summary>
     /// The EnergyPlus Lights element.
@@ -31,7 +31,7 @@ namespace DynamoPlus.Loads
         /// <summary>
         /// The Name of the corresponding Zone or ZoneList
         /// </summary>
-        public Zone ZoneName { get; set; }
+        public string ZoneName { get; set; }
         /// <summary>
         /// The Name of the Lights control schedule.
         /// </summary>
@@ -42,8 +42,9 @@ namespace DynamoPlus.Loads
         /// </summary>
         /// <param name="zoneName"></param>
         /// <param name="scheduleName"></param>
-        public Lights(Zone zoneName, string scheduleName)
+        public Lights(string zoneName, string scheduleName)
         {
+            Name = zoneName + " LightsInst";
             ZoneName = zoneName;
             ScheduleName = scheduleName;
         }
@@ -56,7 +57,7 @@ namespace DynamoPlus.Loads
         /// </returns>
         public override string ToString()
         {
-            return ZoneName + "LightsInst";
+            return Name;
         }
 
         /// <summary>
@@ -66,10 +67,10 @@ namespace DynamoPlus.Loads
         public override string Write()
         {
             var text = "Lights,\n";
-            text += "    " + ZoneName + " LightsInst,  !-Name\n";
+            text += "    " + Name + ",  !-Name\n";
             text += "    " + ZoneName + ",  !-Zone or ZoneList Name\n";
             text += "    " + ScheduleName + ",!-Schedule Name\n";
-            text += "    Watts / Area,            !-Design Level Calculation Method\n";
+            text += "    Watts/Area,            !-Design Level Calculation Method\n";
             text += "    ,                        !-Lighting Level {W}\n";
             text += "    9.68752354606417,        !-Watts per Zone Floor Area {W/m2}\n";
             text += "    ,                        !-Watts per Person {W/person}\n";
