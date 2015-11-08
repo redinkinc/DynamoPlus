@@ -82,6 +82,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\DualSetpoint.cs" />
+    <Compile Include="Controls\Thermostat.cs" />
     <Compile Include="Create.cs" />
     <Compile Include="Elements\Construction.cs" />
     <Compile Include="Elements\MaterialTypes\WindowMaterialGas.cs" />
@@ -96,6 +98,8 @@
     <Compile Include="Elements\ShadingOverhang.cs" />
     <Compile Include="Elements.cs" />
     <Compile Include="File\StringCollector.cs" />
+    <Compile Include="Loads\ElectricEquipment.cs" />
+    <Compile Include="Loads\Lights.cs" />
     <Compile Include="Loads\People.cs" />
     <Compile Include="Simulation.cs" />
     <Compile Include="Elements\FenestrationSurface.cs" />
