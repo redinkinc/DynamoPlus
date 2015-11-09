@@ -31,7 +31,7 @@ namespace DynamoPlus
     /// <summary>
     /// Additional Functions for creating DynamoPlus Elemtents.
     /// </summary>
-    public static class Create
+    public static class Scripts
     {
         /// <summary>
         /// Creates Zones from geometry input.

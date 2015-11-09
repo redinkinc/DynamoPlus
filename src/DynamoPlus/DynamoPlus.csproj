@@ -84,7 +84,7 @@
   <ItemGroup>
     <Compile Include="Controls\DualSetpoint.cs" />
     <Compile Include="Controls\Thermostat.cs" />
-    <Compile Include="Create.cs" />
+    <Compile Include="Scripts.cs" />
     <Compile Include="Geometry\Construction.cs" />
     <Compile Include="Geometry\BuildingSurface.cs" />
     <Compile Include="File\MaterialReader.cs" />
