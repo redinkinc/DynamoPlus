@@ -41,21 +41,8 @@ ScheduleTypeLimits,
     Continuous,              !- Numeric Type
     temperature;             !- Unit Type
 
-ScheduleTypeLimits,
-    Raum-Soll Heizung,       !- Name
-    21,                      !- Lower Limit Value
-    ,                        !- Upper Limit Value
-    Continuous,              !- Numeric Type
-    temperature;             !- Unit Type
-
-ScheduleTypeLimits,
-    Raum-Soll Kühlung,       !- Name
-    ,                        !- Lower Limit Value
-    24,                      !- Upper Limit Value
-    Continuous,              !- Numeric Type
-    temperature;             !- Unit Type
-
 !-   ===========  ALL OBJECTS IN CLASS: SCHEDULE:DAY:INTERVAL ===========
+
 !- Schedule:Day:Interval,
     !- Always Off Default Schedule,  !- Name
     !- On/Off,                  !- Schedule Type Limits Name
@@ -73,6 +60,12 @@ Schedule:Day:Interval,
     1,                      	!- Value Until Time 2
     24:00,                   	!- Time 3 {hh:mm}
     0;                      	!- Value Until Time 3
+Schedule:Day:Interval,
+    Nutzungszeit Weekend,  !- Name
+    On/Off,           			!- Schedule Type Limits Name
+    No,                      	!- Interpolate to Timestep
+    24:00,                   	!- Time 1 {hh:mm}
+    0;                    		!- Value Until Time 1
     
 Schedule:Day:Interval,
     taegl_Betriebszeit_RLT dinv18599-10a3,  !- Name
@@ -106,35 +99,105 @@ Schedule:Day:Interval,
 Schedule:Day:Interval,
     Htg Schedule dinv18599-10a3,  !- Name
     Temperature 1,           !- Schedule Type Limits Name
-    No,                      !- Interpolate to Timestep
-    05:00,                   !- Time 1 {hh:mm}
+    Yes,                      !- Interpolate to Timestep
+    07:00,                   !- Time 1 {hh:mm}
     17,                    	 !- Value Until Time 1
-    18:00,                   !- Time 2 {hh:mm}
+    10:00,                   !- Time 2 {hh:mm}
     21,                      !- Value Until Time 2
-    24:00,                   !- Time 3 {hh:mm}
-    17;                    	 !- Value Until Time 3
-	
+    17:00,                   !- Time 3 {hh:mm}
+    21;                    	 !- Value Until Time 3
+	18:00,                   !- Time 4 {hh:mm}
+    17;                    	 !- Value Until Time 4
+	24:00,                   !- Time 5 {hh:mm}
+    17;                    	 !- Value Until Time 5
+
+Schedule:Day:Interval,
+    Htg Schedule dinv18599-10a19,  !- Name
+    Temperature 1,           !- Schedule Type Limits Name
+    Yes,                      !- Interpolate to Timestep
+    07:00,                   !- Time 1 {hh:mm}
+    17,                    	 !- Value Until Time 1
+    10:00,                   !- Time 2 {hh:mm}
+    21,                      !- Value Until Time 2
+    17:00,                   !- Time 3 {hh:mm}
+    21;                    	 !- Value Until Time 3
+	18:00,                   !- Time 4 {hh:mm}
+    17;                    	 !- Value Until Time 4
+	24:00,                   !- Time 5 {hh:mm}
+    17;                    	 !- Value Until Time 5
+
 Schedule:Day:Interval,
     Clg Schedule dinv18599-10a3,  !- Name
     Temperature 1,           !- Schedule Type Limits Name
-    No,                      !- Interpolate to Timestep
-    05:00,                   !- Time 1 {hh:mm}
+    Yes,                      !- Interpolate to Timestep
+    07:00,                   !- Time 1 {hh:mm}
     28,                    	 !- Value Until Time 1
-    18:00,                   !- Time 2 {hh:mm}
+    10:00,                   !- Time 2 {hh:mm}
     24,                      !- Value Until Time 2
-    24:00,                   !- Time 3 {hh:mm}
-    28;                    	 !- Value Until Time 3
-	
+    17:00,                   !- Time 3 {hh:mm}
+    24;                    	 !- Value Until Time 3
+	18:00,                   !- Time 4 {hh:mm}
+    28;                    	 !- Value Until Time 4
+	24:00,                   !- Time 5 {hh:mm}
+    28;                    	 !- Value Until Time 5
+
+Schedule:Day:Interval,
+    Clg Schedule dinv18599-10a19,  !- Name
+    Temperature 1,           !- Schedule Type Limits Name
+    Yes,                      !- Interpolate to Timestep
+    07:00,                   !- Time 1 {hh:mm}
+    28,                    	 !- Value Until Time 1
+    10:00,                   !- Time 2 {hh:mm}
+    24,                      !- Value Until Time 2
+    17:00,                   !- Time 3 {hh:mm}
+    24;                    	 !- Value Until Time 3
+	18:00,                   !- Time 4 {hh:mm}
+    28;                    	 !- Value Until Time 4
+	24:00,                   !- Time 5 {hh:mm}
+    28;                    	 !- Value Until Time 5
+
+Schedule:Day:Interval,
+	HTG Weekend,               !- Name
+    Temperature 1,              !- Schedule Type Limits Name
+    No,                      !- Interpolate to Timestep
+    24:00,                   !- Time 1 {hh:mm}
+    17;                    	 !- Value Until Time 1
+
+Schedule:Day:Interval,
+	CLG Weekend,             !- Name
+    Temperature 1,              !- Schedule Type Limits Name
+    No,                      !- Interpolate to Timestep
+    24:00,                   !- Time 1 {hh:mm}
+    28;                    	 !- Value Until Time 1
+
 Schedule:Day:Interval,
     Light Schedule dinv18599-10a3,  !- Name
-    Fraction,           !- Schedule Type Limits Name
+    Any Number,           !- Schedule Type Limits Name
     No,                      !- Interpolate to Timestep
     07:00,                   !- Time 1 {hh:mm}
     0,                    	 !- Value Until Time 1
     18:00,                   !- Time 2 {hh:mm}
-    1,                      !- Value Until Time 2
+    25,                      !- Value Until Time 2
     24:00,                   !- Time 3 {hh:mm}
     0;                    	 !- Value Until Time 3
+	
+Schedule:Day:Interval,
+    Light Schedule dinv18599-10a19,  !- Name
+    Any Number,           !- Schedule Type Limits Name
+    No,                      !- Interpolate to Timestep
+    07:00,                   !- Time 1 {hh:mm}
+    0,                    	 !- Value Until Time 1
+    18:00,                   !- Time 2 {hh:mm}
+    5,                      !- Value Until Time 2
+    24:00,                   !- Time 3 {hh:mm}
+    0;                    	 !- Value Until Time 3
+	
+Schedule:Day:Interval,
+	Lights Weekend,             !- Name
+    Any Number,              !- Schedule Type Limits Name
+    No,                      !- Interpolate to Timestep
+    24:00,                   !- Time 1 {hh:mm}
+    0;                    	 !- Value Until Time 1
 
 !- Schedule:Day:Interval,
     !- Medium Office Infil Quarter On Default Schedule,  !- Name
@@ -146,49 +209,59 @@ Schedule:Day:Interval,
     !- 0.25,                    !- Value Until Time 2
     !- 24:00,                   !- Time 3 {hh:mm}
     !- 1;                       !- Value Until Time 3
+	
+	!-   ===========  ALL OBJECTS IN CLASS: SCHEDULE:COMPACT ===========
 
-  Schedule:Compact,
+Schedule:Compact,
     ALWAYS 4,                !- Name
     Any Number,              !- Schedule Type Limits Name
     Through: 12/31,          !- Field 1
     For: AllDays,            !- Field 2
-    Until: 24:00, 4;          !- Field 3
+    Until: 24:00, 4;         !- Field 3
 
   Schedule:Compact,
-    ALWAYS 20,               !- Name
+    ALWAYS 21,               !- Name
     Any Number,              !- Schedule Type Limits Name
     Through: 12/31,          !- Field 1
     For: AllDays,            !- Field 2
-    Until: 24:00, 20;         !- Field 3
+    Until: 24:00, 21;        !- Field 3
 
-  Schedule:Compact,
+Schedule:Compact,
     ALWAYS 24,               !- Name
     Any Number,              !- Schedule Type Limits Name
     Through: 12/31,          !- Field 1
     For: AllDays,            !- Field 2
-    Until: 24:00, 24;         !- Field 3
+    Until: 24:00, 24;        !- Field 3
 
+Schedule:Compact,
+    ALWAYS 70,               !- Name
+    Any Number,              !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For: AllDays,            !- Field 2
+    Until: 24:00, 70;        !- Field 3
+	
 !-   ===========  ALL OBJECTS IN CLASS: SCHEDULE:WEEK:DAILY ===========
-! Schedule:Week:Compact, WeekDays on Peak,
-	! WeekDays,
-	! Day On Peak,
-	! AllOtherDays
-	! Day Off Peak;
 
 Schedule:Week:Compact,
     htg-week-dinv18599-10a3,  	  !- Name
-    For: AllDays,  				  !- Sunday Schedule:Day Name
-    Htg Schedule dinv18599-10a3;  !- Monday Schedule:Day Name
+    For: WeekDays,  			  !- DayType
+    Htg Schedule dinv18599-10a3,  !- Schedule:Day Name
+	For: AllOtherDays,
+	HTG Weekend;
 
 Schedule:Week:Compact,
     clg-week-dinv18599-10a3,  	  !- Name
-    For: AllDays,  				  !- Sunday Schedule:Day Name
-    Clg Schedule dinv18599-10a3;  !- Saturday Schedule:Day Name
-
+    For: WeekDays,  				  !- DayType
+    Clg Schedule dinv18599-10a3,  !- Schedule:Day Name
+	For: AllOtherDays,
+	CLG Weekend;
+	
 Schedule:Week:Compact,
     occ-week-dinv18599-10a3,           !- Name
-    For: AllDays,               	       !- DayType List 1
-    taegl_Nutzungszeit dinv18599-10a3; !- Schedule:Day Name 1
+    For: WeekDays,               	   !- DayType
+    taegl_Nutzungszeit dinv18599-10a3, !- Schedule:Day Name
+	For: AllOtherDays,
+	Nutzungszeit Weekend;
 	
 Schedule:Week:Compact,
     dinv18599-10a3-heizung,                    !- Name
@@ -202,8 +275,17 @@ Schedule:Week:Compact,
 	
 Schedule:Week:Compact,
     dinv18599-10a3-light,      	   !- Name
-    For: AllDays,             	   !- DayType List 1
-    Light Schedule dinv18599-10a3; !- Schedule:Day Name 1
+    For: WeekDays,             	   !- DayType List 1
+    Light Schedule dinv18599-10a3, !- Schedule:Day Name 1
+	For: AllOtherDays,
+	Lights Weekend;
+	
+Schedule:Week:Compact,
+    dinv18599-10a19-light,      	   !- Name
+    For: WeekDays,             	   !- DayType List 1
+    Light Schedule dinv18599-10a19, !- Schedule:Day Name 1
+	For: AllOtherDays,
+	Lights Weekend;
 	
 !-   ===========  ALL OBJECTS IN CLASS: SCHEDULE:YEAR ===========
 Schedule:Year,
@@ -255,6 +337,15 @@ Schedule:Year,
     Beleuchtung-dinv18599-10a3, !- Name
     Fraction,            	 !- Schedule Type Limits Name
     dinv18599-10a3-light,    !- Schedule:Week Name
+    1,                       !- Start Month
+    1,                       !- Start Day
+    12,                      !- End Month
+    31;                      !- End Day	
+	
+Schedule:Year,
+    Beleuchtung-dinv18599-10a19, !- Name
+    Fraction,            	 !- Schedule Type Limits Name
+    dinv18599-10a19-light,    !- Schedule:Week Name
     1,                       !- Start Month
     1,                       !- Start Day
     12,                      !- End Month

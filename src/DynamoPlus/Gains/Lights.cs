@@ -70,14 +70,14 @@ namespace DynamoPlus.Gains
             text += "    " + Name + ",  !-Name\n";
             text += "    " + ZoneName + ",  !-Zone or ZoneList Name\n";
             text += "    " + ScheduleName + ",!-Schedule Name\n";
-            text += "    Watts/Area,            !-Design Level Calculation Method\n";
-            text += "    ,                        !-Lighting Level {W}\n";
-            text += "    9.68752354606417,        !-Watts per Zone Floor Area {W/m2}\n";
-            text += "    ,                        !-Watts per Person {W/person}\n";
-            text += "    ,                        !-Return Air Fraction\n";
-            text += "    ,                        !-Fraction Radiant\n";
-            text += "    ,                        !-Fraction Visible\n";
-            text += "    ,                        !-Fraction Replaceable\n";
+            text += "    Watts/Area,          !-Design Level Calculation Method\n";
+            text += "    ,                    !-Lighting Level {W}\n";
+            text += "    1,                   !-Watts per Zone Floor Area {W/m2}\n";
+            text += "    ,                    !-Watts per Person {W/person}\n";
+            text += "    ,                    !-Return Air Fraction\n";
+            text += "    ,                    !-Fraction Radiant\n";
+            text += "    ,                    !-Fraction Visible\n";
+            text += "    ,                    !-Fraction Replaceable\n";
             text += "    Lights; !-End - Use Subcategory\n";
             return text;
         }

@@ -76,10 +76,10 @@ namespace DynamoPlus.Gains
             text += "    " + Name + ",  !-Name\n";
             text += "    " + ZoneName + ",  !-Zone or ZoneList Name\n";
             text += "    " + NumOfPeopleScheduleName + ",  !-Number of People Schedule Name\n";
-            text += "    People/Area,             !-Number of People Calculation Method\n";
+            text += "    Area/Person,             !-Number of People Calculation Method\n";
             text += "    0,                       !-Number of People\n";
-            text += "    0.0538195752559121,      !-People per Zone Floor Area { person / m2}\n";
-            text += "    ,                        !-Zone Floor Area per Person { m2 / person}\n";
+            text += "    10,                      !-People per Zone Floor Area {person/m2}\n";
+            text += "    ,                        !-Zone Floor Area per Person {m2/person}\n";
             text += "    0.3,                     !-Fraction Radiant\n";
             text += "    ,                        !-Sensible Heat Fraction\n";
             text += "    " + ActivityLevelScheduleName + "; !-Activity Level Schedule Name\n";

@@ -72,7 +72,7 @@ namespace DynamoPlus.Gains
             text += "    " + ScheduleName + ",!-Schedule Name\n";
             text += "    Watts/Area,              !- Design Level Calculation Method\n";
             text += "    ,                        !- Design Level {W}\n";
-            text += "    5.8125141276385,         !- Watts per Zone Floor Area {W/m2}\n";
+            text += "    10,                      !- Watts per Zone Floor Area {W/m2}\n";
             text += "    ,                        !- Watts per Person {W/person}\n";
             text += "    ,                        !- Fraction Latent\n";
             text += "    ,                        !- Fraction Radiant\n";
