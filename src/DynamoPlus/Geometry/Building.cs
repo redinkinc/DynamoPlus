@@ -25,6 +25,7 @@ using System;
 using System.Globalization;
 using Autodesk.DesignScript.Runtime;
 using Dynamo.Models;
+using Dynamo.Nodes;
 
 namespace DynamoPlus.Geometry
 {

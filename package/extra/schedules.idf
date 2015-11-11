@@ -105,9 +105,9 @@ Schedule:Day:Interval,
     10:00,                   !- Time 2 {hh:mm}
     21,                      !- Value Until Time 2
     17:00,                   !- Time 3 {hh:mm}
-    21;                    	 !- Value Until Time 3
+    21,                    	 !- Value Until Time 3
 	18:00,                   !- Time 4 {hh:mm}
-    17;                    	 !- Value Until Time 4
+    17,                    	 !- Value Until Time 4
 	24:00,                   !- Time 5 {hh:mm}
     17;                    	 !- Value Until Time 5
 
@@ -120,9 +120,9 @@ Schedule:Day:Interval,
     10:00,                   !- Time 2 {hh:mm}
     21,                      !- Value Until Time 2
     17:00,                   !- Time 3 {hh:mm}
-    21;                    	 !- Value Until Time 3
+    21,                    	 !- Value Until Time 3
 	18:00,                   !- Time 4 {hh:mm}
-    17;                    	 !- Value Until Time 4
+    17,                    	 !- Value Until Time 4
 	24:00,                   !- Time 5 {hh:mm}
     17;                    	 !- Value Until Time 5
 
@@ -135,9 +135,9 @@ Schedule:Day:Interval,
     10:00,                   !- Time 2 {hh:mm}
     24,                      !- Value Until Time 2
     17:00,                   !- Time 3 {hh:mm}
-    24;                    	 !- Value Until Time 3
+    24,                    	 !- Value Until Time 3
 	18:00,                   !- Time 4 {hh:mm}
-    28;                    	 !- Value Until Time 4
+    28,                    	 !- Value Until Time 4
 	24:00,                   !- Time 5 {hh:mm}
     28;                    	 !- Value Until Time 5
 
@@ -150,9 +150,9 @@ Schedule:Day:Interval,
     10:00,                   !- Time 2 {hh:mm}
     24,                      !- Value Until Time 2
     17:00,                   !- Time 3 {hh:mm}
-    24;                    	 !- Value Until Time 3
+    24,                    	 !- Value Until Time 3
 	18:00,                   !- Time 4 {hh:mm}
-    28;                    	 !- Value Until Time 4
+    28,                    	 !- Value Until Time 4
 	24:00,                   !- Time 5 {hh:mm}
     28;                    	 !- Value Until Time 5
 
@@ -335,7 +335,7 @@ Schedule:Year,
 	
 Schedule:Year,
     Beleuchtung-dinv18599-10a3, !- Name
-    Fraction,            	 !- Schedule Type Limits Name
+    Any Number,            	 !- Schedule Type Limits Name
     dinv18599-10a3-light,    !- Schedule:Week Name
     1,                       !- Start Month
     1,                       !- Start Day
@@ -344,7 +344,7 @@ Schedule:Year,
 	
 Schedule:Year,
     Beleuchtung-dinv18599-10a19, !- Name
-    Fraction,            	 !- Schedule Type Limits Name
+    Any Number,            	 !- Schedule Type Limits Name
     dinv18599-10a19-light,    !- Schedule:Week Name
     1,                       !- Start Month
     1,                       !- Start Day

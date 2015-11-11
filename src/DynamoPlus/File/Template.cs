@@ -66,7 +66,7 @@ namespace DynamoPlus.File
         /// </summary>
         /// <param name="templateFile"></param>
         /// <returns></returns>
-        [MultiReturn(new[] { "Schedule:Compact", "Schedule:Year", "Schedule:Constant", "ScheduleTypeLimits" })]
+        [MultiReturn(new[] { "Schedule:Year", "Schedule:Compact", "Schedule:Week:Compact", "ScheduleTypeLimits", "Schedule:Constant" })]
         public static Dictionary<string, List<string>> GetScheduleNames(string templateFile)
         {
             return new Dictionary<string, List<string>>()

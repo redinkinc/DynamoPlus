@@ -1,4 +1,4 @@
-<Workspace Version="0.8.2.2392" X="0" Y="0" zoom="1" Name="PrepareGeometry" Description="Splits the geometry and returns all faces" ID="7c92e5a0-074d-4044-aaaf-3404e36304f5" Category="DynamoPlus.DynamoPlus.Scripts">
+<Workspace Version="0.9.0.3067" X="-497.689516575599" Y="84.3041718872409" zoom="0.784369328044827" Name="PrepareGeometry" Description="Splits the geometry and returns all faces" ID="7c92e5a0-074d-4044-aaaf-3404e36304f5" Category="DynamoPlus.DynamoPlus.Scripts">
   <NamespaceResolutionMap>
     <ClassMap partialName="Point" resolvedName="Autodesk.DesignScript.Geometry.Point" assemblyName="ProtoGeometry.dll" />
     <ClassMap partialName="Vector" resolvedName="Autodesk.DesignScript.Geometry.Vector" assemblyName="ProtoGeometry.dll" />
@@ -8,8 +8,8 @@
   <Elements>
     <Dynamo.Nodes.DSFunction guid="7034c77c-dac3-40e9-b26b-c2d84cc19ff8" type="Dynamo.Nodes.DSFunction" nickname="Face.SurfaceGeometry" x="1760.92527240518" y="150.26862393113" isVisible="false" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" assembly="ProtoGeometry.dll" function="Autodesk.DesignScript.Geometry.Face.SurfaceGeometry" />
     <Dynamo.Nodes.DSFunction guid="3a81ebab-d567-41e2-830d-3ec0fd1aa879" type="Dynamo.Nodes.DSFunction" nickname="Topology.Faces" x="1554.92694501773" y="148.08610909145" isVisible="false" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" assembly="ProtoGeometry.dll" function="Autodesk.DesignScript.Geometry.Topology.Faces" />
-    <Dynamo.Nodes.DSFunction guid="43a5b7da-eddc-4733-837e-1bd8d2db249c" type="Dynamo.Nodes.DSFunction" nickname="Flatten" x="1391.15502818604" y="145.98483533052" isVisible="false" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" assembly="BuiltIn" function="Flatten@var[]..[]" />
-    <Dynamo.Nodes.DSFunction guid="344017c0-d90c-41e8-b9eb-b2faa6245751" type="Dynamo.Nodes.DSFunction" nickname="Geometry.Split" x="1144.77759801528" y="144.31163548284" isVisible="false" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" assembly="ProtoGeometry.dll" function="Autodesk.DesignScript.Geometry.Geometry.Split@Autodesk.DesignScript.Geometry.Geometry" />
+    <Dynamo.Nodes.DSFunction guid="43a5b7da-eddc-4733-837e-1bd8d2db249c" type="Dynamo.Nodes.DSFunction" nickname="Flatten" x="1393.70484742105" y="129.41101030296" isVisible="false" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" assembly="BuiltIn" function="Flatten@var[]..[]" />
+    <Dynamo.Nodes.DSFunction guid="344017c0-d90c-41e8-b9eb-b2faa6245751" type="Dynamo.Nodes.DSFunction" nickname="Geometry.Split" x="1140.95286916277" y="118.813443132747" isVisible="false" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" assembly="ProtoGeometry.dll" function="Autodesk.DesignScript.Geometry.Geometry.Split@Autodesk.DesignScript.Geometry.Geometry" />
     <Dynamo.Nodes.DSFunction guid="4c24bd40-1f3d-42b0-bdfe-8221a8542d96" type="Dynamo.Nodes.DSFunction" nickname="Geometry.Split" x="901.786627995206" y="0" isVisible="false" isUpstreamVisible="true" lacing="Longest" isSelectedInput="False" assembly="ProtoGeometry.dll" function="Autodesk.DesignScript.Geometry.Geometry.Split@Autodesk.DesignScript.Geometry.Geometry" />
     <Dynamo.Nodes.DSFunction guid="d9c53272-a271-442b-9513-42b70ac8737a" type="Dynamo.Nodes.DSFunction" nickname="Plane.ByOriginNormal" x="706.633242030891" y="216.55057444254" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" assembly="ProtoGeometry.dll" function="Autodesk.DesignScript.Geometry.Plane.ByOriginNormal@Autodesk.DesignScript.Geometry.Point,Autodesk.DesignScript.Geometry.Vector">
       <PortInfo index="0" default="True" />
@@ -24,7 +24,7 @@
     <Dynamo.Nodes.Symbol guid="e9148be2-79a0-4558-a1d0-9b183ee79421" type="Dynamo.Nodes.Symbol" nickname="Input" x="0" y="0" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True">
       <Symbol value="element : Element" />
     </Dynamo.Nodes.Symbol>
-    <Dynamo.Nodes.Output guid="a3101120-fc03-46a7-ad4e-797b9b4ad8ce" type="Dynamo.Nodes.Output" nickname="Output" x="1987.92527240518" y="0" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False">
+    <Dynamo.Nodes.Output guid="a3101120-fc03-46a7-ad4e-797b9b4ad8ce" type="Dynamo.Nodes.Output" nickname="Output" x="2008.32382628525" y="24.2232827325881" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False">
       <Symbol value="Surface" />
     </Dynamo.Nodes.Output>
   </Elements>
@@ -45,6 +45,6 @@
   <Annotations />
   <Presets />
   <Cameras>
-    <Camera Name="background_preview" eyeX="249011332186112" eyeY="214970612580352" eyeZ="-31903971278848" lookX="-24538544865280" lookY="-139033443303424" lookZ="319792560996352" />
+    <Camera Name="Background Preview" eyeX="-17" eyeY="24" eyeZ="50" lookX="12" lookY="-13" lookZ="-58" upX="0" upY="1" upZ="0" />
   </Cameras>
 </Workspace>
