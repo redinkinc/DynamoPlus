@@ -1,0 +1,1172 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DynamoPlus</name>
+    </assembly>
+    <members>
+        <member name="T:DynamoPlus.Controls.Thermostat">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:DynamoPlus.Controls.Thermostat.ZoneName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:DynamoPlus.Controls.Thermostat.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Creates a Thermostat with a DualSetpoint setpoint.
+            </summary>
+            <param name="zoneName">The name of the corresponding Zone or ZoneList</param>
+            <param name="heatingSpTempScheduleName">The name of the Schedule controling the heating setpoint temperature</param>
+            <param name="coolingSpTempScheduleName">The name of the Schedule controling the cooling setpoint temperature</param>
+        </member>
+        <member name="M:DynamoPlus.Controls.Thermostat.ToString">
+            <summary>
+            Returns a string that represents the current object.
+            </summary>
+            <returns>
+            A string that represents the current object.
+            </returns>
+        </member>
+        <member name="M:DynamoPlus.Controls.Thermostat.Write">
+            <summary>
+            Adds possibility to write into a file
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:DynamoPlus.Scripts">
+            <summary>
+            Additional Functions for creating DynamoPlus Elemtents.
+            </summary>
+        </member>
+        <member name="M:DynamoPlus.Scripts.FromGeometry(System.Collections.Generic.List{Autodesk.DesignScript.Geometry.Geometry})">
+            <summary>
+            Creates Zones from geometry input.
+            </summary>
+            <returns>All Elements from the geometry.</returns>
+        </member>
+        <member name="M:DynamoPlus.Scripts.BuildingSurfacesByGeometryGroups(System.Collections.Generic.List{System.Collections.Generic.List{Autodesk.DesignScript.Geometry.Surface}})">
+            <summary>
+            
+            </summary>
+            <param name="geometrySurfaces"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DynamoPlus.Scripts.BuildingSurfacesByOrientation(System.Collections.Generic.List{Autodesk.DesignScript.Geometry.Surface},DynamoPlus.Geometry.Zone,Autodesk.DesignScript.Geometry.Point)">
+            <summary>
+            
+            </summary>
+            <param name="surfaces"></param>
+            <param name="zone"></param>
+            <param name="centerpoint"></param>
+        </member>
+        <member name="M:DynamoPlus.Scripts.FindCorelatingBuildingSurfaces(System.Collections.Generic.List{DynamoPlus.Geometry.BuildingSurface})">
+            <summary>
+            
+            </summary>
+            <param name="buildingSurfaces"></param>
+            <returns></returns>
+        </member>
+        <member name="T:DynamoPlus.Geometry.Construction">
+            <summary>
+            The EnergyPlus Construction Element.
+            </summary>
+        </member>
+        <member name="M:DynamoPlus.Geometry.Construction.#ctor(System.String,System.Collections.Generic.List{System.String})">
+            <summary>
+            The EnergyPlus Construction
+            </summary>
+            <param name="name">name</param>
+            <param name="layer">List of Materialnames from outside to inside</param>
+        </member>
+        <member name="M:DynamoPlus.Geometry.Construction.ConstructionByData(System.String,System.Collections.Generic.List{System.String})">
+            <summary>
+            Creates a energy plus Construction
+            </summary>
+            <param name="name"></param>
+            <param name="layer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DynamoPlus.Geometry.Construction.ReadInFromTemplate(System.String)">
+            <summary>
+            Reads in Constructions from the template and returns a list of Constructions
+            </summary>
+            <param name="template"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DynamoPlus.Geometry.Construction.ToString">
+            <summary>
+            Returns a string that represents the current object.
+            </summary>
+            <returns>
+            A string that represents the current object.
+            </returns>
+        </member>
+        <member name="M:DynamoPlus.Geometry.Construction.Write">
+            <summary>
+            Writes the properties of the Surface into one string
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:DynamoPlus.Geometry.BuildingSurface">
+            <summary>
+            BuildingSurfaces are surfaces of the main building like walls, floors etc.
+            </summary>
+        </member>
+        <member name="P:DynamoPlus.Geometry.BuildingSurface.Surface">
+            <summary>
+            The Surface Geometry representing the BuildingSurface
+            </summary>
+        </member>
+        <member name="P:DynamoPlus.Geometry.BuildingSurface.Type">
+            <summary>
+            The Type of the BuildingSurface
+            </summary>
+        </member>
+        <member name="P:DynamoPlus.Geometry.BuildingSurface.ConstructionName">
+            <summary>
+            The Construction of the BuildingSurface
+            </summary>
+        </member>
+        <member name="P:DynamoPlus.Geometry.BuildingSurface.BoundaryCondition">
+            <summary>
+            The Outside Boundary Condition of the BuildingSurface
+            </summary>
+        </member>
+        <member name="P:DynamoPlus.Geometry.BuildingSurface.BoundaryObject">
+            <summary>
+            The Outside Boundary Condition Object of the BuildingSurface
+            </summary>
+        </member>
+        <member name="P:DynamoPlus.Geometry.BuildingSurface.FenestrationSurfacesNumber">
+            <summary>
+            Counts the FenestrationSurfaces related to the Surface. Each Surface counts as one FensestrationsSurfaces
+            </summary>
+        </member>
+        <member name="F:DynamoPlus.Geometry.BuildingSurface.SunExposed">
+            <summary>
+            True if BuildingSurface is SunExposed
+            </summary>
+        </member>
+        <member name="F:DynamoPlus.Geometry.BuildingSurface.WindExposed">
+            <summary>
+            True if BuildingSurface is WindExposed
+            </summary>
+        </member>
+        <member name="M:DynamoPlus.Geometry.BuildingSurface.#ctor(Autodesk.DesignScript.Geometry.Surface,DynamoPlus.Geometry.Zone,System.String,System.String,System.String,System.String)">
+            <summary>
+            Adds a Surface by a List of Points
+            </summary>
+            <param name="surface">Dynamo Surface that represents the Building Surface</param>
+            <param name="zone">Zone of the BuildingSurface</param>
+            <param name="name">Name of the BuildingSurface. If "default" it will be named by Zone and a counter (like "Zonename - Surface 1").</param>
+            <param name="constructionName">Defines the construction of the Surface</param>
+            <param name="boundaryCondition"></param>
+            <param name="type">sets the type of the construction [external, internal, roof, ceiling, floor]</param>
+        </member>
+        <member name="M:DynamoPlus.Geometry.BuildingSurface.ByPoints(System.Collections.Generic.List{Autodesk.DesignScript.Geometry.Point},DynamoPlus.Geometry.Zone,System.String,System.String,System.String,System.String)">
+            <summary>
+            Creates an DesignScript.Geometry.Surface from a pointlist and returns the DynamoPlus.BuildingSurface.
+            </summary>
+            <param name="points">List of points</param>
+            <param name="zone">the zone</param>
+            <param name="name">Name of the BuildingSurface. If "default" it will be named by Zone and a counter (like "Zonename - Surface 1").</param>
+            <param name="constructionName">a construction name</param>
+            <param name="boundaryCondition">the OutsideBoundaryCondition</param>
+            <param name="type">The Type of the BuildingSurface</param>
+            <returns>A DynamoPlus BuildingSurface</returns>
+        </member>
+        <member name="M:DynamoPlus.Geometry.BuildingSurface.SetRelation(DynamoPlus.Geometry.BuildingSurface)">
+            <summary>
+            Sets the BuildingSurface in Relation to another one (BoundaryCondition is set to "Surface").
+            </summary>
+            <param name="otherBuildingSurface">The related BuildingSurface</param>
+        </member>
+        <member name="M:DynamoPlus.Geometry.BuildingSurface.Inspect">
+            <summary>
+            Returns the BuildingSurface Parameter
+            </summary>
+            <returns>The BuildingSurface Parameter</returns>
+        </member>
+        <member name="M:DynamoPlus.Geometry.BuildingSurface.ToString">
+            <summary>
+            Returns a string that represents the current object.
+            </summary>
+            <returns>
+            A string that represents the current object.
+            </returns>
+        </member>
+        <member name="M:DynamoPlus.Geometry.BuildingSurface.Write">
+            <summary>
+            Writes the properties of the Surface into one string
+            </summary>
+            <returns>BuildingSurface:Detailed as String.</returns>
+        </member>
+        <member name="T:DynamoPlus.Geometry.ShadingOverhang">
+            <summary>
+            Used to define Shading Overhangs above a FenestrationSurface
+            </summary>
+        </member>
+        <member name="M:DynamoPlus.Geometry.ShadingOverhang.#ctor(DynamoPlus.Geometry.FenestrationSurface,System.Double,System.Double,System.Double)">
+            <summary>
+            Adds a symmetrical Shading Overhang above a FenestrationSurface with an Angle of 90 degree.
+            </summary>
+            <param name="fenestrationSurface"></param>
+            <param name="heightAbove"></param>
+            <param name="extension">Extension szmmetrical to both sides</param>
+            <param name="depth"></param>
+        </member>
+        <member name="M:DynamoPlus.Geometry.ShadingOverhang.ToString">
+            <summary>
+            Returns a string that represents the current object.
+            </summary>
+            <returns>
+            A string that represents the current object.
+            </returns>
+        </member>
+        <member name="M:DynamoPlus.Geometry.ShadingOverhang.Write">
+            <summary>
+             Writes all Information of the Building object into a string. 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DynamoPlus.Geometry.ShadingOverhang.Draw(System.Collections.Generic.List{DynamoPlus.Geometry.ShadingOverhang})">
+            <summary>
+            Draws the shading overhang by a list of Overhangs
+            </summary>
+            <param name="shadingOverhangsList"></param>
+            <returns></returns>
+        </member>
+        <member name="T:DynamoPlus.Geometry.FenestrationSurface">
+            <summary>
+            Fenestration Surfaces are Openings like Windows ore doors
+            </summary>
+        </member>
+        <member name="P:DynamoPlus.Geometry.FenestrationSurface.Surface">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:DynamoPlus.Geometry.FenestrationSurface.BuildingSurface">
+            <summary>
+            Surface where the FenestrationSurface is lying in
+            </summary>
+        </member>
+        <member name="P:DynamoPlus.Geometry.FenestrationSurface.ShadingOverhang">
+            <summary>
+            Corresponding Shading Overhang
+            </summary>
+        </member>
+        <member name="M:DynamoPlus.Geometry.FenestrationSurface.FenestrationSurfaceBySurface(Autodesk.DesignScript.Geometry.Surface,DynamoPlus.Geometry.BuildingSurface)">
+            <summary>
+            Adds a Fenestration Surface in a Surface
+            </summary>
+            <param name="surface"></param>
+            <param name="buildingSurface"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DynamoPlus.Geometry.FenestrationSurface.ByGlazingPercentage(System.Collections.Generic.List{DynamoPlus.Geometry.BuildingSurface},System.Double)">
+            <summary>
+            Adds EnergyPlus Windows (FenestrationSurface) to a list of rectangular EnergyPlus Surfaces by a given percentage.
+            </summary>
+            <param name="buildingSurfaces">A list of BuildingSurfaces where the windows should be added to.</param>
+            <param name="percentage">The glazing percentage (factor). Has to be between 0.05 and 0.95!</param>
+            <returns></returns>
+        </member>
+        <member name="M:DynamoPlus.Geometry.FenestrationSurface.ToString">
+            <summary>
+            Returns a string that represents the current object.
+            </summary>
+            <returns>
+            A string that represents the current object.
+            </returns>
+        </member>
+        <member name="M:DynamoPlus.Geometry.FenestrationSurface.Write">
+            <summary>
+            Writes the data into one string
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:DynamoPlus.Geometry.Building">
+            <summary>
+            The EnergyPlus Building
+            </summary>
+        </member>
+        <member name="M:DynamoPlus.Geometry.Building.ByName(System.String)">
+            <summary>
+            Creates a Building with default values:
+            North Axis {deg}: 0 
+            Terrain: Urban
+            Loads Convergence Tolerance Value: 0.04
+            Temperature Convergence Tolerance Value {deltaC}: 0.4
+            Solar Distribution: Full Exterior
+            Maximum Number of Warmup Days: 25
+            Minimum Number of Warmup Days: 0
+            </summary>
+            <param name="name">The Name of the EnergyPlus.Building</param>
+            <returns>The EnergyPlus Building</returns>
+        </member>
+        <member name="M:DynamoPlus.Geometry.Building.ByNameTerrainAndSolarDistribution(System.String,System.String,System.String)">
+            <summary>
+            Creates a Building with default values:
+            North Axis {deg}: 0 
+            Loads Convergence Tolerance Value: 0.04
+            Temperature Convergence Tolerance Value {deltaC}: 0.4
+            Maximum Number of Warmup Days: 25
+            Minimum Number of Warmup Days: 0
+            </summary>
+            <param name="name">The Name of the EnergyPlus.Building</param>
+            <returns>The EnergyPlus Building</returns>
+        </member>
+        <member name="M:DynamoPlus.Geometry.Building.ToString">
+            <summary>
+            Returns a string that represents the current object.
+            </summary>
+            <returns>
+            A string that represents the current object.
+            </returns>
+        </member>
+        <member name="M:DynamoPlus.Geometry.Building.Write">
+            <summary>
+            Writes all Information of the Building object into a string. 
+            </summary>
+            <returns>All Building Information as string.</returns>
+        </member>
+        <member name="T:DynamoPlus.Geometry.ShadingSurface">
+            <summary>
+            Shading Surfaces are building or objects which shadow the main building 
+            </summary>
+        </member>
+        <member name="M:DynamoPlus.Geometry.ShadingSurface.#ctor(System.Collections.Generic.List{Autodesk.DesignScript.Geometry.Point},System.String,System.Boolean)">
+            <summary>
+            Adds a shading Surface by points and name
+            </summary>
+            <param name="points"></param>
+            <param name="name"></param>
+            <param name="Fixed">Defines if the ShadingSurface is oriented on the global (false) or relative (true) coordinate system</param>
+        </member>
+        <member name="M:DynamoPlus.Geometry.ShadingSurface.ToString">
+            <summary>
+            Returns a string that represents the current object.
+            </summary>
+            <returns>
+            A string that represents the current object.
+            </returns>
+        </member>
+        <member name="M:DynamoPlus.Geometry.ShadingSurface.Write">
+            <summary>
+            Writes the properties of the Surface into one string
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DynamoPlus.Geometry.ShadingSurface.ShadingSurfacesBySurfaceList(System.Collections.Generic.List{Autodesk.DesignScript.Geometry.Surface})">
+            <summary>
+            Adds Shading Surfaces by a List of Dynamo Surfaces
+            </summary>
+            <param name="surfaces"></param>
+            <returns></returns>
+        </member>
+        <member name="T:DynamoPlus.Geometry.Zone">
+            <summary>
+            Defines a Zone inside a building
+            </summary>
+        </member>
+        <member name="P:DynamoPlus.Geometry.Zone.BuildingSurfaces">
+            <summary>
+            The surfaces within the zone
+            </summary>
+        </member>
+        <member name="P:DynamoPlus.Geometry.Zone.SurfaceNumber">
+            <summary>
+            Counter for surfaces
+            </summary>
+        </member>
+        <member name="M:DynamoPlus.Geometry.Zone.#ctor(System.String,System.Double,Autodesk.DesignScript.Geometry.Point,System.Int32)">
+            <summary>
+            Creates a Zone by a orientation, Origin and a building
+            </summary>
+            <param name="name"></param>
+            <param name="orientation">The Orientation relative to the building</param>
+            <param name="origin">The starting point of the zone</param>
+            <param name="multiplier"></param>
+        </member>
+        <member name="M:DynamoPlus.Geometry.Zone.ByNameOriginAndOrientation(System.String,Autodesk.DesignScript.Geometry.Point,System.Double)">
+            <summary>
+            
+            </summary>
+            <param name="name"></param>
+            <param name="origin"></param>
+            <param name="orientation"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DynamoPlus.Geometry.Zone.ToString">
+            <summary>
+            Returns a string that represents the current object.
+            </summary>
+            <returns>
+            A string that represents the current object.
+            </returns>
+        </member>
+        <member name="M:DynamoPlus.Geometry.Zone.Write">
+            <summary>
+            Writes all Information of the Building object into a string. 
+            </summary>
+            <returns>All Building Information as string.</returns>
+        </member>
+        <member name="T:DynamoPlus.Geometry.ZoneList">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:DynamoPlus.Geometry.ZoneList.Zones">
+            <summary>
+            The Zones Contained in the ZoneList
+            </summary>
+        </member>
+        <member name="M:DynamoPlus.Geometry.ZoneList.#ctor(System.String,System.Collections.Generic.List{DynamoPlus.Geometry.Zone})">
+            <summary>
+            A EnergyPlus ZoneList Element.
+            </summary>
+            <param name="name">Name of the ZoneList</param>
+            <param name="zones">Zones to be added to ZoneList</param>
+        </member>
+        <member name="M:DynamoPlus.Geometry.ZoneList.ToString">
+            <summary>
+            
+            </summary>
+            <returns>the name of zonelist and number of zones</returns>
+        </member>
+        <member name="M:DynamoPlus.Geometry.ZoneList.Write">
+            <summary>
+            Writes the properties of the Surface into one string
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:DynamoPlus.File.MaterialReader">
+            <summary>
+            This class collects all different Materials so that it's easier to add new Material-Types
+            </summary>
+        </member>
+        <member name="T:DynamoPlus.File.Template">
+            <summary>
+            reads the template
+            </summary>
+        </member>
+        <member name="M:DynamoPlus.File.Template.ReadNames(System.String)">
+            <summary>
+            returns elements defined in the template file.
+            </summary>
+            <param name="template">tamplate file (path)</param>
+            <returns></returns>
+        </member>
+        <member name="M:DynamoPlus.File.Template.GetScheduleNames(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="templateFile"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DynamoPlus.File.Template.GetConstrutionsAndMaterials(System.String)">
+            <summary>
+            Reads in all pre-written Constructions, Materials and WindowMaterials from the template
+            </summary>
+            <param name="templateFile">The Filepath to the template file</param>
+            <returns>Construction, Materials and Windowmaterials as DynamoPlus Elements.</returns>
+        </member>
+        <member name="M:DynamoPlus.File.Template.GetDataFromFileByKeyword(System.String,System.String)">
+            <summary>
+            Possibility to get the informations from the template File to a specific keyword 
+            </summary>
+            <param name="path"></param>
+            <param name="keyword"></param>
+            <returns></returns>
+        </member>
+        <member name="T:DynamoPlus.File.Idf">
+            <summary>
+            This class handles the idf File and stores all relevant information
+            </summary>
+        </member>
+        <member name="M:DynamoPlus.File.Idf.ReadResults(System.String)">
+            <summary>
+            Reads the Results from the Simulation
+            </summary>
+            <param name="templateFilePath"></param>
+            /// <returns></returns>
+        </member>
+        <member name="M:DynamoPlus.File.Idf.Write(System.String,System.String,DynamoPlus.Elements,System.String)">
+            <summary>
+            Write Simulation file (.idf)
+            </summary>
+            <param name="directory">file directory</param>
+            <param name="name">file name</param>
+            <param name="elements">all elements to add to file</param>
+            <param name="additionalInformation">additional string to write to file</param>
+            <returns>file path</returns>
+        </member>
+        <member name="T:DynamoPlus.AbsElement">
+            <summary>
+            Data_Type that implements IEquatable to make Duplicates impossible
+            </summary>
+        </member>
+        <member name="P:DynamoPlus.AbsElement.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:DynamoPlus.AbsElement.Equals(System.Object)">
+            <summary>
+            Determines whether the specified object is equal to the current object.
+            </summary>
+            <returns>
+            true if the specified object  is equal to the current object; otherwise, false.
+            </returns>
+            <param name="obj">The object to compare with the current object. </param>
+        </member>
+        <member name="M:DynamoPlus.AbsElement.GetHashCode">
+            <summary>
+            Needed to define this, even if I think that it is not used in our context
+            </summary>
+            <returns>
+            A hash code for the current object.
+            </returns>
+        </member>
+        <member name="M:DynamoPlus.AbsElement.Equals(DynamoPlus.AbsElement)">
+            <summary>
+            Indicates whether the current object is equal to another object of the same type.
+            </summary>
+            <returns>
+            true if the current object is equal to the <paramref name="other"/> parameter; otherwise, false.
+            </returns>
+            <param name="other">An object to compare with this object.</param>
+        </member>
+        <member name="M:DynamoPlus.AbsElement.Write">
+            <summary>
+            Adds possibility to write into a file
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DynamoPlus.AbsElement.ToString">
+            <summary>
+            Returns a string that represents the current object.
+            </summary>
+            <returns>
+            A string that represents the current object.
+            </returns>
+        </member>
+        <member name="T:DynamoPlus.NoDuplicateList`1">
+            <summary>
+            A List that doesn't allow to insert a element twice
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:DynamoPlus.NoDuplicateList`1.AddNoDuplicateList(DynamoPlus.NoDuplicateList{`0})">
+            <summary>
+            
+            </summary>
+            <param name="otherList"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DynamoPlus.NoDuplicateList`1.Add(DynamoPlus.AbsElement)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="T:DynamoPlus.Elements">
+            <summary>
+            All Elements of the Building
+            </summary>
+        </member>
+        <member name="P:DynamoPlus.Elements.Building">
+            <summary>
+            The Building where the elements are associated to.
+            </summary>
+        </member>
+        <member name="P:DynamoPlus.Elements.Zones">
+            <summary>
+            List of Zones
+            </summary>
+        </member>
+        <member name="P:DynamoPlus.Elements.ZoneLists">
+            <summary>
+            List of ZoneLists
+            </summary>
+        </member>
+        <member name="P:DynamoPlus.Elements.BuildingSurfaces">
+            <summary>
+            List of BuildingSurfaces
+            </summary>
+        </member>
+        <member name="P:DynamoPlus.Elements.FenestrationSurfaces">
+            <summary>
+            List of Fenestration Surfaces
+            </summary>
+        </member>
+        <member name="P:DynamoPlus.Elements.ShadingSurfaces">
+            <summary>
+            List of Shading Surfaces
+            </summary>
+        </member>
+        <member name="P:DynamoPlus.Elements.ShadingOverhangs">
+            <summary>
+            List of Overhangs
+            </summary>
+        </member>
+        <member name="P:DynamoPlus.Elements.Materials">
+            <summary>
+            List of Materials that checks for duplicates in the add function
+            </summary>
+        </member>
+        <member name="P:DynamoPlus.Elements.Constructions">
+            <summary>
+            List of Constructions
+            </summary>
+        </member>
+        <member name="P:DynamoPlus.Elements.Lights">
+            <summary>
+            List of Lights
+            </summary>
+        </member>
+        <member name="P:DynamoPlus.Elements.Peoples">
+            <summary>
+            List of Loads
+            </summary>
+        </member>
+        <member name="P:DynamoPlus.Elements.ElectricEquipments">
+            <summary>
+            List of Loads
+            </summary>
+        </member>
+        <member name="P:DynamoPlus.Elements.Thermostats">
+            <summary>
+            List of Thermostats
+            </summary>
+        </member>
+        <member name="M:DynamoPlus.Elements.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:DynamoPlus.Elements.AddBuilding(DynamoPlus.Geometry.Building)">
+            <summary>
+            
+            </summary>
+            <param name="building"></param>
+            <returns>The Elements object.</returns>
+        </member>
+        <member name="M:DynamoPlus.Elements.AddZones(System.Collections.Generic.List{DynamoPlus.Geometry.Zone})">
+            <summary>
+            
+            </summary>
+            <param name="zones"></param>
+            <returns>The Elements object.</returns>
+        </member>
+        <member name="M:DynamoPlus.Elements.AddZoneList(System.Collections.Generic.List{DynamoPlus.Geometry.ZoneList})">
+            <summary>
+            Adds ZoneList to Elements
+            </summary>
+            <returns>The Elements object.</returns>
+        </member>
+        <member name="M:DynamoPlus.Elements.AddBuildingSurfaces(System.Collections.Generic.List{DynamoPlus.Geometry.BuildingSurface})">
+            <summary>
+            Adds the BuildingSurfaces to the Project Elements.
+            </summary>
+            <param name="buildingSurfaces">List of BuildingSurfaces to be added.</param>
+            <returns>The Elements object.</returns>
+        </member>
+        <member name="M:DynamoPlus.Elements.AddShadingSurfaces(System.Collections.Generic.List{DynamoPlus.Geometry.ShadingSurface})">
+            <summary>
+            
+            </summary>
+            <param name="shadingSurfaces"></param>
+            <returns>The Elements object.</returns>
+        </member>
+        <member name="M:DynamoPlus.Elements.AddFenestrationSurfaces(System.Collections.Generic.List{DynamoPlus.Geometry.FenestrationSurface})">
+            <summary>
+            
+            </summary>
+            <param name="fenestrationSurfaces"></param>
+            <returns>The Elements object.</returns>
+        </member>
+        <member name="M:DynamoPlus.Elements.AddShadingOverhangs(System.Collections.Generic.List{DynamoPlus.Geometry.ShadingOverhang})">
+            <summary>
+            
+            </summary>
+            <param name="shadingOverhangs"></param>
+            <returns>The Elements object.</returns>
+        </member>
+        <member name="M:DynamoPlus.Elements.AddMaterials(System.Collections.Generic.List{DynamoPlus.AbsElement})">
+            <summary>
+            
+            </summary>
+            <param name="materials"></param>
+            <returns>The Elements object.</returns>
+        </member>
+        <member name="M:DynamoPlus.Elements.AddConstructions(System.Collections.Generic.List{DynamoPlus.Geometry.Construction})">
+            <summary>
+            
+            </summary>
+            <param name="constructions"></param>
+            <returns>The Elements object.</returns>
+        </member>
+        <member name="M:DynamoPlus.Elements.AddLigths(System.Collections.Generic.List{DynamoPlus.Gains.Lights})">
+            <summary>
+            
+            </summary>
+            <param name="lights"></param>
+            <returns>The Elements object.</returns>
+        </member>
+        <member name="M:DynamoPlus.Elements.AddPeople(System.Collections.Generic.List{DynamoPlus.Gains.People})">
+            <summary>
+            
+            </summary>
+            <param name="peoples"></param>
+            <returns>The Elements object.</returns>
+        </member>
+        <member name="M:DynamoPlus.Elements.AddElectricEquipment(System.Collections.Generic.List{DynamoPlus.Gains.ElectricEquipment})">
+            <summary>
+            
+            </summary>
+            <param name="electricEquipments"></param>
+            <returns>The Elements object.</returns>
+        </member>
+        <member name="M:DynamoPlus.Elements.AddThermostats(System.Collections.Generic.List{DynamoPlus.Controls.Thermostat})">
+            <summary>
+            
+            </summary>
+            <param name="thermostats"></param>
+            <returns>The Elements object.</returns>
+        </member>
+        <member name="M:DynamoPlus.Elements.ToString">
+            <summary>
+            Returns a string that represents the current object.
+            </summary>
+            <returns>
+            A string that represents the current object.
+            </returns>
+        </member>
+        <member name="T:DynamoPlus.Gains.ElectricEquipment">
+            <summary>
+            The EnergyPlus ElectricEquipment.
+            </summary>
+        </member>
+        <member name="P:DynamoPlus.Gains.ElectricEquipment.ZoneName">
+            <summary>
+            The Name of the corresponding Zone or ZoneList
+            </summary>
+        </member>
+        <member name="P:DynamoPlus.Gains.ElectricEquipment.ScheduleName">
+            <summary>
+            The Name of the Lights control schedule.
+            </summary>
+        </member>
+        <member name="M:DynamoPlus.Gains.ElectricEquipment.#ctor(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="zoneName"></param>
+            <param name="scheduleName"></param>
+        </member>
+        <member name="M:DynamoPlus.Gains.ElectricEquipment.ToString">
+            <summary>
+            Returns a string that represents the current object.
+            </summary>
+            <returns>
+            A string that represents the current object.
+            </returns>
+        </member>
+        <member name="M:DynamoPlus.Gains.ElectricEquipment.Write">
+            <summary>
+            Adds possibility to write into a file
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:DynamoPlus.Gains.Lights">
+            <summary>
+            The EnergyPlus Lights element.
+            </summary>
+        </member>
+        <member name="P:DynamoPlus.Gains.Lights.ZoneName">
+            <summary>
+            The Name of the corresponding Zone or ZoneList
+            </summary>
+        </member>
+        <member name="P:DynamoPlus.Gains.Lights.ScheduleName">
+            <summary>
+            The Name of the Lights control schedule.
+            </summary>
+        </member>
+        <member name="M:DynamoPlus.Gains.Lights.#ctor(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="zoneName"></param>
+            <param name="scheduleName"></param>
+        </member>
+        <member name="M:DynamoPlus.Gains.Lights.ToString">
+            <summary>
+            Returns a string that represents the current object.
+            </summary>
+            <returns>
+            A string that represents the current object.
+            </returns>
+        </member>
+        <member name="M:DynamoPlus.Gains.Lights.Write">
+            <summary>
+            Adds possibility to write into a file
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:DynamoPlus.Gains.People">
+            <summary>
+            The energyPlus People element
+            </summary>
+        </member>
+        <member name="P:DynamoPlus.Gains.People.ZoneName">
+            <summary>
+            The Name of the Corresponding Zone or ZoneList
+            </summary>
+        </member>
+        <member name="P:DynamoPlus.Gains.People.NumOfPeopleScheduleName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:DynamoPlus.Gains.People.ActivityLevelScheduleName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:DynamoPlus.Gains.People.#ctor(System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="zoneName"></param>
+            <param name="numOfPeopleScheduleName"></param>
+            <param name="activityLevelSchuleName"></param>
+        </member>
+        <member name="M:DynamoPlus.Gains.People.ToString">
+            <summary>
+            Returns a string that represents the current object.
+            </summary>
+            <returns>
+            A string that represents the current object.
+            </returns>
+        </member>
+        <member name="M:DynamoPlus.Gains.People.Write">
+            <summary>
+            Adds possibility to write into a file
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:DynamoPlus.Materials.Material">
+            <summary>
+            The EnergyPlus Material Element.
+            </summary>
+        </member>
+        <member name="M:DynamoPlus.Materials.Material.CreateMaterialByData(System.String,System.String,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            Material as defined in Energy Plus
+            </summary>
+            <param name="name">The name of the material</param>
+            <param name="roughness">The roughness of the material (VeryRough, Rough, MediumRough, MediumSmooth, Smooth, VerySmooth</param>
+            <param name="thickness">The thickness in meter</param>
+            <param name="conductivity">The conductivity in W/mK</param>
+            <param name="density">The density in kg/m³</param>
+            <param name="specificHeat">The specific heat in J/kgK</param>
+            <param name="thermalAbsorptance">The thermal absorptance between 0.0 and 1.0</param>
+            <param name="solarAbsorptance">The solar absorptance between 0.0 and 1.0</param>
+            <param name="visibleAbsorptance">The visible absorptance between 0.0 and 1.0</param>
+            <returns>An EnergyPlus Material</returns>
+        </member>
+        <member name="M:DynamoPlus.Materials.Material.ReadInFromTemplate(System.String)">
+            <summary>
+            Reads in the Data from the Template and Returns a List of Materials
+            </summary>
+            <param name="templatePath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DynamoPlus.Materials.Material.ToString">
+            <summary>
+            Returns a string that represents the current object.
+            </summary>
+            <returns>
+            A string that represents the current object.
+            </returns>
+        </member>
+        <member name="M:DynamoPlus.Materials.Material.Write">
+            <summary>
+            Writes the Material into a string for the idf File.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:DynamoPlus.Materials.MaterialAirGap">
+            <summary>
+            energy Plus Material:AirGap
+            </summary>
+        </member>
+        <member name="M:DynamoPlus.Materials.MaterialAirGap.MaterialAirGapByData(System.String,System.Double)">
+            <summary>
+            Creates an EnergyPlus MaterialAirGap
+            </summary>
+            <param name="name"></param>
+            <param name="thermalResistance"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DynamoPlus.Materials.MaterialAirGap.ToString">
+            <summary>
+            Returns a string that represents the current object.
+            </summary>
+            <returns>
+            A string that represents the current object.
+            </returns>
+        </member>
+        <member name="M:DynamoPlus.Materials.MaterialAirGap.Write">
+            <summary>
+            Adds possibility to write into a file
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:DynamoPlus.Materials.MaterialNoMass">
+            <summary>
+            Energy Plus Material:NoMass
+            </summary>
+        </member>
+        <member name="M:DynamoPlus.Materials.MaterialNoMass.MaterialNoMassByData(System.String,System.String,System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            Create an Energy Plus Material:NoMass by user defined Data
+            </summary>
+            <param name="name"></param>
+            <param name="roughness"></param>
+            <param name="resistance"></param>
+            <param name="thermalAbsorptance"></param>
+            <param name="solarAbsorptance"></param>
+            <param name="visibleAbsorptance"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DynamoPlus.Materials.MaterialNoMass.ToString">
+            <summary>
+            Returns a string that represents the current object.
+            </summary>
+            <returns>
+            A string that represents the current object.
+            </returns>
+        </member>
+        <member name="M:DynamoPlus.Materials.MaterialNoMass.Write">
+            <summary>
+            Adds possibility to write into a file
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:DynamoPlus.Materials.WindowMaterialGas">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:DynamoPlus.Materials.WindowMaterialGas.WindowMaterialGasByData(System.String,System.String,System.Double)">
+            <summary>
+            
+            </summary>
+            <param name="name"></param>
+            <param name="gasType"></param>
+            <param name="thickness"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DynamoPlus.Materials.WindowMaterialGas.ToString">
+            <summary>
+            Returns a string that represents the current object.
+            </summary>
+            <returns>
+            A string that represents the current object.
+            </returns>
+        </member>
+        <member name="M:DynamoPlus.Materials.WindowMaterialGas.Write">
+            <summary>
+            Adds possibility to write into a file
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:DynamoPlus.Materials.WindowMaterialGlazing">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:DynamoPlus.Materials.WindowMaterialGlazing.WindowMaterialGlazingByData(System.String,System.String,System.String,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            Energy Plus WindowMaterial:Glazing
+            </summary>
+            <param name="name"></param>
+            <param name="opticalDataType"></param>
+            <param name="spectralDataSetName"></param>
+            <param name="thickness"></param>
+            <param name="solarTransmittance"></param>
+            <param name="solarReflectanceFront"></param>
+            <param name="solarReflectanceBack"></param>
+            <param name="visibleTransmittance"></param>
+            <param name="visibleReflectanceFront"></param>
+            <param name="visibleReflectanceBack"></param>
+            <param name="irTransmittance"></param>
+            <param name="irHemisphericalEmissivityFront"></param>
+            <param name="irHemisphericalEmissivityBack"></param>
+            <param name="conductivity"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DynamoPlus.Materials.WindowMaterialGlazing.ToString">
+            <summary>
+            Returns a string that represents the current object.
+            </summary>
+            <returns>
+            A string that represents the current object.
+            </returns>
+        </member>
+        <member name="M:DynamoPlus.Materials.WindowMaterialGlazing.Write">
+            <summary>
+            Adds possibility to write into a file
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:DynamoPlus.Materials.WindowMaterialSimpleGlazingSystem">
+            <summary>
+            Energy Plus WindowMaterial:SimpleGlazingSystem
+            </summary>
+        </member>
+        <member name="M:DynamoPlus.Materials.WindowMaterialSimpleGlazingSystem.WindowMaterialSimpleGlazingSystemByData(System.String,System.Double,System.Double,System.Double)">
+            <summary>
+            Energy Plus WindowMaterial:SimpleGlazingSystem
+            </summary>
+            <param name="name"></param>
+            <param name="uFactor"></param>
+            <param name="solarHeatGainCoefficient"></param>
+            <param name="visibleTransmittance"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DynamoPlus.Materials.WindowMaterialSimpleGlazingSystem.ToString">
+            <summary>
+            Returns a string that represents the current object.
+            </summary>
+            <returns>
+            A string that represents the current object.
+            </returns>
+        </member>
+        <member name="M:DynamoPlus.Materials.WindowMaterialSimpleGlazingSystem.Write">
+            <summary>
+            Adds possibility to write into a file
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:DynamoPlus.Simulation">
+            <summary>
+            Runs EPlus
+            </summary>
+        </member>
+        <member name="M:DynamoPlus.Simulation.RunEPlus(System.String,System.String,System.String)">
+            <summary>
+            Runs the EnergyPlus Simulation.
+            </summary>
+            <param name="directory">EnergyPlus installation directory</param>
+            <param name="idf">idf file</param>
+            <param name="weatherData">weather data file</param>
+            <returns>True when finished.</returns>
+        </member>
+        <member name="T:DynamoPlus.Project">
+            <summary>
+            The DynamoPlus Project.
+            </summary>
+        </member>
+        <member name="P:DynamoPlus.Project.Elements">
+            <summary>
+            The EnergyPlus Elements
+            </summary>
+        </member>
+        <member name="M:DynamoPlus.Project.#ctor(System.String,System.String)">
+            <summary>
+            Creates an DynamoPlusProject
+            </summary>
+        </member>
+        <member name="M:DynamoPlus.Project.Create(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="name"></param>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="T:DynamoPlus.System.EquipmentList">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:DynamoPlus.System.EquipmentList.#ctor(DynamoPlus.Geometry.Zone)">
+            <summary>
+            
+            </summary>
+            <param name="zone"></param>
+        </member>
+        <member name="M:DynamoPlus.System.EquipmentList.ToString">
+            <summary>
+            Returns a string that represents the current object.
+            </summary>
+            <returns>
+            A string that represents the current object.
+            </returns>
+        </member>
+        <member name="M:DynamoPlus.System.EquipmentList.Write">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:DynamoPlus.System.IdealLoadsAirSystem">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:DynamoPlus.System.IdealLoadsAirSystem.#ctor(DynamoPlus.Geometry.Zone)">
+            <summary>
+            
+            </summary>
+            <param name="zone"></param>
+        </member>
+        <member name="M:DynamoPlus.System.IdealLoadsAirSystem.ToString">
+            <summary>
+            Returns a string that represents the current object.
+            </summary>
+            <returns>
+            A string that represents the current object.
+            </returns>
+        </member>
+        <member name="M:DynamoPlus.System.IdealLoadsAirSystem.Write">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:DynamoPlus.System.ZoneConnections">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:DynamoPlus.System.ZoneConnections.#ctor(DynamoPlus.Geometry.Zone)">
+            <summary>
+            
+            </summary>
+            <param name="zone"></param>
+        </member>
+        <member name="M:DynamoPlus.System.ZoneConnections.ToString">
+            <summary>
+             Returns the Name of the Zone of the ZoneConnection.
+             </summary>
+            <returns>Zonename</returns>
+             
+        </member>
+        <member name="M:DynamoPlus.System.ZoneConnections.Write">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
