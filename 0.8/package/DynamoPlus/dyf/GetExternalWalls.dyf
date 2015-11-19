@@ -1,0 +1,43 @@
+<Workspace Version="0.8.2.2392" X="141.214819997076" Y="173.961603981908" zoom="0.412998980493848" Name="GetExternalWalls" Description="Returns all BuildingSurfaces that are WALLS with Boundary Condition OUTDOORS" ID="5b35eef7-a12b-4327-be9d-844898e6d63f" Category="DynamoPlus.DynamoPlus.Scripts">
+  <NamespaceResolutionMap>
+    <ClassMap partialName="Point" resolvedName="Autodesk.DesignScript.Geometry.Point" assemblyName="ProtoGeometry.dll" />
+    <ClassMap partialName="Vector" resolvedName="Autodesk.DesignScript.Geometry.Vector" assemblyName="ProtoGeometry.dll" />
+    <ClassMap partialName="Plane" resolvedName="Autodesk.DesignScript.Geometry.Plane" assemblyName="ProtoGeometry.dll" />
+    <ClassMap partialName="List" resolvedName="DSCore.List" assemblyName="DSCoreNodes.dll" />
+  </NamespaceResolutionMap>
+  <Elements>
+    <Dynamo.Nodes.DSFunction guid="ffbd5549-4b66-44ba-9528-00298d7e39a5" type="Dynamo.Nodes.DSFunction" nickname="List.FilterByBoolMask" x="1185.49776920127" y="198.803010889087" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" assembly="DSCoreNodes.dll" function="DSCore.List.FilterByBoolMask@var[]..[],var[]..[]" />
+    <Dynamo.Nodes.DSFunction guid="0f736dee-e3ff-40e3-a149-8cf8ccd73204" type="Dynamo.Nodes.DSFunction" nickname="List.ContainsItem" x="1031.23662844055" y="109.402149252539" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" assembly="DSCoreNodes.dll" function="DSCore.List.ContainsItem@var[]..[],var" />
+    <Dynamo.Nodes.DSFunction guid="e967e2af-4ab4-4bcc-b0a4-f767aebe8de5" type="Dynamo.Nodes.DSFunction" nickname="List.GetItemAtIndex" x="1314.96873850621" y="0" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" assembly="DSCoreNodes.dll" function="DSCore.List.GetItemAtIndex@var[]..[],int" />
+    <Dynamo.Nodes.DSFunction guid="8022c147-5428-4c3d-a7ed-85ed7a31da3f" type="Dynamo.Nodes.DSFunction" nickname="List.AllIndicesOf" x="844.75982714117" y="61.363209847868" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" assembly="DSCoreNodes.dll" function="DSCore.List.AllIndicesOf@var[]..[],var" />
+    <Dynamo.Nodes.DSFunction guid="0af226dd-3bb2-4501-bc46-e0469d055a70" type="Dynamo.Nodes.DSFunction" nickname="List.AllIndicesOf" x="841.63910275683" y="201.617220596952" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" assembly="DSCoreNodes.dll" function="DSCore.List.AllIndicesOf@var[]..[],var" />
+    <Dynamo.Nodes.CodeBlockNodeModel guid="b2b6cbc1-eaf5-4d17-955b-a718e203897e" type="Dynamo.Nodes.CodeBlockNodeModel" nickname="Code Block" x="686.93497528871" y="137.381489442429" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" CodeText="&quot;Wall&quot;;&#xA;&quot;Outdoors&quot;;" ShouldFocus="false" />
+    <Dynamo.Nodes.DSFunction guid="befe2d19-d503-4cce-b78e-5a46b063b3df" type="Dynamo.Nodes.DSFunction" nickname="BuildingSurface.Inspect" x="250" y="81.793786641577" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" assembly="..\..\src\DynamoPlus09\bin\Debug\DynamoPlus.dll" function="DynamoPlus.Geometry.BuildingSurface.Inspect" />
+    <Dynamo.Nodes.Symbol guid="8eacd3bd-a5fb-478b-9e6b-6b587082b7ed" type="Dynamo.Nodes.Symbol" nickname="Input" x="0" y="0" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True">
+      <Symbol value="list : var[]..[]" />
+    </Dynamo.Nodes.Symbol>
+    <Dynamo.Nodes.Output guid="021b08bd-7c4d-4597-afb2-001f785c9bbf" type="Dynamo.Nodes.Output" nickname="Output" x="1524.96873850621" y="0" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False">
+      <Symbol value="item" />
+    </Dynamo.Nodes.Output>
+  </Elements>
+  <Connectors>
+    <Dynamo.Models.ConnectorModel start="ffbd5549-4b66-44ba-9528-00298d7e39a5" start_index="0" end="e967e2af-4ab4-4bcc-b0a4-f767aebe8de5" end_index="1" portType="0" />
+    <Dynamo.Models.ConnectorModel start="0f736dee-e3ff-40e3-a149-8cf8ccd73204" start_index="0" end="ffbd5549-4b66-44ba-9528-00298d7e39a5" end_index="1" portType="0" />
+    <Dynamo.Models.ConnectorModel start="e967e2af-4ab4-4bcc-b0a4-f767aebe8de5" start_index="0" end="021b08bd-7c4d-4597-afb2-001f785c9bbf" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="8022c147-5428-4c3d-a7ed-85ed7a31da3f" start_index="0" end="0f736dee-e3ff-40e3-a149-8cf8ccd73204" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="0af226dd-3bb2-4501-bc46-e0469d055a70" start_index="0" end="ffbd5549-4b66-44ba-9528-00298d7e39a5" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="0af226dd-3bb2-4501-bc46-e0469d055a70" start_index="0" end="0f736dee-e3ff-40e3-a149-8cf8ccd73204" end_index="1" portType="0" />
+    <Dynamo.Models.ConnectorModel start="b2b6cbc1-eaf5-4d17-955b-a718e203897e" start_index="0" end="8022c147-5428-4c3d-a7ed-85ed7a31da3f" end_index="1" portType="0" />
+    <Dynamo.Models.ConnectorModel start="b2b6cbc1-eaf5-4d17-955b-a718e203897e" start_index="1" end="0af226dd-3bb2-4501-bc46-e0469d055a70" end_index="1" portType="0" />
+    <Dynamo.Models.ConnectorModel start="befe2d19-d503-4cce-b78e-5a46b063b3df" start_index="1" end="8022c147-5428-4c3d-a7ed-85ed7a31da3f" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="befe2d19-d503-4cce-b78e-5a46b063b3df" start_index="4" end="0af226dd-3bb2-4501-bc46-e0469d055a70" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="8eacd3bd-a5fb-478b-9e6b-6b587082b7ed" start_index="0" end="e967e2af-4ab4-4bcc-b0a4-f767aebe8de5" end_index="0" portType="0" />
+    <Dynamo.Models.ConnectorModel start="8eacd3bd-a5fb-478b-9e6b-6b587082b7ed" start_index="0" end="befe2d19-d503-4cce-b78e-5a46b063b3df" end_index="0" portType="0" />
+  </Connectors>
+  <Notes />
+  <Annotations />
+  <Presets />
+  <Cameras>
+    <Camera Name="Background Preview" eyeX="-17" eyeY="24" eyeZ="50" lookX="12" lookY="-13" lookZ="-58" upX="0" upY="1" upZ="0" />
+  </Cameras>
+</Workspace>

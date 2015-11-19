@@ -305,8 +305,10 @@ namespace DynamoPlus.File
         {
             var text = GetHeadLine("OUTPUT");
             text += "Output:Table:SummaryReports,\n";
-            text += "    ZoneHeatingSummaryMonthly,  !- Report 3 Name\n";
-            text += "    ZoneCoolingSummaryMonthly;  !- Report 4 Name\n\n";
+            text += "    ZoneHeatingSummaryMonthly,  !- Report 1 Name\n";
+            text += "    ZoneCoolingSummaryMonthly,  !- Report 2 Name\n";
+            text += "    WindowZoneSummaryMonthly,  !- Report 3 Name\n\n";
+            text += "    WindowEnergyZoneSummaryMonthly;  !- Report 4 Name\n\n";
             text += "    OutputControl:Table:Style,\n";
             text += "    Comma,                    !- Column Separator\n";
             text += "	 JtokWh;                  !- Unit Conversion\n\n";

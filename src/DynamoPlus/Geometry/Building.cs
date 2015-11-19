@@ -45,7 +45,7 @@ namespace DynamoPlus.Geometry
         private int MaxNWarmupDays { get; set; }
         private int MinNWarmupDays { get; set; }
 
-        private Building  (string name, double northAxis, string terrain, double loadsConvergenceToleranceValue,
+        public Building  (string name, double northAxis, string terrain, double loadsConvergenceToleranceValue,
             double deltaC, string solarDistribution, int maxNWarmupDays,int minNWarmupDays)
         {
             Name = name;
@@ -69,10 +69,26 @@ namespace DynamoPlus.Geometry
         /// Minimum Number of Warmup Days: 0
         /// </summary>
         /// <param name="name">The Name of the EnergyPlus.Building</param>
-        /// <returns></returns>
+        /// <returns>The EnergyPlus Building</returns>
         public static Building ByName(string name)
         {
             var building = new Building(name, -0, "Urban", 0.04, 0.4, "FullExterior", 25, 0);
+            return building;
+        }
+
+        /// <summary>
+        /// Creates a Building with default values:
+        /// North Axis {deg}: 0 
+        /// Loads Convergence Tolerance Value: 0.04
+        /// Temperature Convergence Tolerance Value {deltaC}: 0.4
+        /// Maximum Number of Warmup Days: 25
+        /// Minimum Number of Warmup Days: 0
+        /// </summary>
+        /// <param name="name">The Name of the EnergyPlus.Building</param>
+        /// <returns>The EnergyPlus Building</returns>
+        public static Building ByNameTerrainAndSolarDistribution(string name, string terrain = "Urban", string solarDistribution = "FullInteriorAndExteriorWithReflections")
+        {
+            var building = new Building(name, -0, terrain, 0.04, 0.4, solarDistribution, 25, 0);
             return building;
         }
 
