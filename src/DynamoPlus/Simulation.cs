@@ -37,14 +37,14 @@ namespace DynamoPlus
         /// <summary>
         /// Runs the EnergyPlus Simulation.
         /// </summary>
-        /// <param name="directory">EnergyPlus installation directory</param>
-        /// <param name="idf">idf file</param>
-        /// <param name="weatherData">weather data file</param>
+        /// <param name="directory">EnergyPlus installation directory.</param>
+        /// <param name="idfFilePath">idf file path</param>
+        /// <param name="eplusDirectory">the name of the weather data file (has to be contained in the Eplus WeatherData folder).</param>
         /// <returns>True when finished.</returns>
-        public static string RunEPlus (string directory, string idf, string weatherData)
+        public static string RunEPlus (string directory, string idfFilePath, string eplusDirectory)
         {
-            var file = Path.ChangeExtension(idf, null);
-            var command = "RunEPlus " + file + " " + weatherData;
+            var file = Path.ChangeExtension(idfFilePath, null);
+            var command = "RunEPlus " + file + " " + eplusDirectory;
 
             var proc = new Process()
             {

@@ -1066,9 +1066,9 @@
             <summary>
             Runs the EnergyPlus Simulation.
             </summary>
-            <param name="directory">EnergyPlus installation directory</param>
-            <param name="idf">idf file</param>
-            <param name="weatherData">weather data file</param>
+            <param name="directory">EnergyPlus installation directory.</param>
+            <param name="idfFilePath">idf file path</param>
+            <param name="eplusDirectory">the name of the weather data file (has to be contained in the Eplus WeatherData folder).</param>
             <returns>True when finished.</returns>
         </member>
         <member name="T:DynamoPlus.Project">
