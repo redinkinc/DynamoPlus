@@ -37,7 +37,7 @@ namespace DynamoPlus.Geometry
     public class FenestrationSurface:AbsElement
     {
         /// <summary>
-        /// 
+        /// The EnergyPlus Element FenestrationSurface.
         /// </summary>
         public Surface Surface { get; set; }
         private string Type { get; set; }
@@ -52,7 +52,9 @@ namespace DynamoPlus.Geometry
         /// </summary>
         public ShadingOverhang ShadingOverhang { get; set; }
 
-        private FenestrationSurface(Surface surface, BuildingSurface buildingSurface, string constructionName = "default")
+        private int Multiplier { get; set; }
+
+        private FenestrationSurface(Surface surface, BuildingSurface buildingSurface, int multiplier, string constructionName = "default")
         {
             Name = buildingSurface.Name + " - Window " + buildingSurface.FenestrationSurfacesNumber;
 
@@ -66,18 +68,32 @@ namespace DynamoPlus.Geometry
             BuildingSurface = buildingSurface;
             Surface = surface;
             buildingSurface.FenestrationSurfacesNumber++;
+
+            Multiplier = multiplier;
         }
 
         //Get 'Fenestration Surface by Selected Surface
         /// <summary>
         /// Adds a Fenestration Surface in a Surface
         /// </summary>
-        /// <param name="surface"></param>
-        /// <param name="buildingSurface"></param>
+        /// <param name="surface">A Dynamo Surface</param>
+        /// <param name="buildingSurface">The Dynamo BuildingSurface that the window is placed on.</param>
         /// <returns></returns>
-        public static FenestrationSurface FenestrationSurfaceBySurface (Surface surface, BuildingSurface buildingSurface)
+        public static FenestrationSurface FenestrationSurfaceBySurface(Surface surface, BuildingSurface buildingSurface)
         {
-            return new FenestrationSurface(surface, buildingSurface);
+            return new FenestrationSurface(surface, buildingSurface, 1);
+        }
+
+        //Get 'Fenestration Surface by Selected Surface
+        /// <summary>
+        /// Adds a Fenestration Surface in a Surface
+        /// </summary>
+        /// <param name="surface">A Dynamo Surface</param>
+        /// <param name="buildingSurface">The Dynamo BuildingSurface that the window is placed on.</param>
+        /// <returns></returns>
+        public static FenestrationSurface FenestrationSurfaceBySurface(Surface surface, BuildingSurface buildingSurface, string constructionName, int multiplier)
+        {
+            return new FenestrationSurface(surface, buildingSurface, multiplier, constructionName);
         }
 
         /// <summary>
@@ -118,7 +134,7 @@ namespace DynamoPlus.Geometry
                 var surface = Surface.ByPerimeterPoints(points);
 
                 //add to List
-                fenestrationsurfaceList.Add(new FenestrationSurface(surface, buildingSurface));
+                fenestrationsurfaceList.Add(new FenestrationSurface(surface, buildingSurface, 1));
             }
             //return List
             return fenestrationsurfaceList;

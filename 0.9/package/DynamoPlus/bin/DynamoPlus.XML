@@ -246,7 +246,7 @@
         </member>
         <member name="P:DynamoPlus.Geometry.FenestrationSurface.Surface">
             <summary>
-            
+            The EnergyPlus Element FenestrationSurface.
             </summary>
         </member>
         <member name="P:DynamoPlus.Geometry.FenestrationSurface.BuildingSurface">
@@ -263,8 +263,16 @@
             <summary>
             Adds a Fenestration Surface in a Surface
             </summary>
-            <param name="surface"></param>
-            <param name="buildingSurface"></param>
+            <param name="surface">A Dynamo Surface</param>
+            <param name="buildingSurface">The Dynamo BuildingSurface that the window is placed on.</param>
+            <returns></returns>
+        </member>
+        <member name="M:DynamoPlus.Geometry.FenestrationSurface.FenestrationSurfaceBySurface(Autodesk.DesignScript.Geometry.Surface,DynamoPlus.Geometry.BuildingSurface,System.String,System.Int32)">
+            <summary>
+            Adds a Fenestration Surface in a Surface
+            </summary>
+            <param name="surface">A Dynamo Surface</param>
+            <param name="buildingSurface">The Dynamo BuildingSurface that the window is placed on.</param>
             <returns></returns>
         </member>
         <member name="M:DynamoPlus.Geometry.FenestrationSurface.ByGlazingPercentage(System.Collections.Generic.List{DynamoPlus.Geometry.BuildingSurface},System.Double)">
