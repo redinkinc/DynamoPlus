@@ -90,6 +90,8 @@ namespace DynamoPlus.Geometry
         /// </summary>
         /// <param name="surface">A Dynamo Surface</param>
         /// <param name="buildingSurface">The Dynamo BuildingSurface that the window is placed on.</param>
+        /// <param name="constructionName">The ConstructionName for the Window.</param>
+        /// <param name="multiplier">The Multiplier for the window.</param>
         /// <returns></returns>
         public static FenestrationSurface FenestrationSurfaceBySurface(Surface surface, BuildingSurface buildingSurface, string constructionName, int multiplier)
         {
@@ -151,7 +153,7 @@ namespace DynamoPlus.Geometry
         /// <summary>
         /// Writes the data into one string
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The String to be added in the final idf File.</returns>
         [IsVisibleInDynamoLibrary(false)]
         public override string Write()
         {
