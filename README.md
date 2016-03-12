@@ -7,4 +7,4 @@ DynamoPlus was developed to have the ability to link Dynamo geometry, either nat
 
 ## Problems on adding DynamoPlus to Dynamo Library
 
-If you encounter problems adding DynamoPlus to your Library (ProtoCore.HaltException), please visit https://github.com/DynamoDS/Dynamo/issues/6220.
+If you encounter problems adding DynamoPlus to your Library (ProtoCore.BuiltHaltException), please visit https://github.com/DynamoDS/Dynamo/issues/6220.
